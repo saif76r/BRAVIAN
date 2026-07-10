@@ -100,8 +100,6 @@ const rawImages = [
   'Cultural Programs_BGI Cultural Fest 2026_2026-02-20_33.jpg',
   'Cultural Programs_BGI Cultural Fest 2026_2026-02-20_34.jpg',
   'Cultural Programs_BGI Cultural Fest 2026_2026-02-20_35.jpg',
-
-
 ];
 
 interface GalleryItem {
@@ -125,8 +123,8 @@ export default function GalleryView() {
 
     return {
       id: index + 1,
-      // আপনার ফোল্ডারের আসল নাম 'gallary' তাই পাথেও /gallary/ ব্যবহার করা হয়েছে যেন Vite ফাইল পায়
-      url: `/src/assets/gallary/${fileName}`,
+      // পাথ পরিবর্তন করে public ফোল্ডার রিলেটিভ করা হয়েছে (/gallery/ বানান দিয়ে)
+      url: `/gallery/${fileName}`,
       backupUrl: fallbackImages[index],
       category: category || 'Events',
       title: title || 'BGI Community Archive',
