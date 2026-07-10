@@ -4,7 +4,7 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import { motion } from 'motion/react'; // Sparkle Animation এর জন্য ইমপোর্ট করা হলো
+import { motion } from 'motion/react';
 import { 
   onAuthStateChanged, 
   signInWithEmailAndPassword, 
@@ -60,15 +60,14 @@ function GlobalSparkleBackground() {
   const colors = ['#38bdf8', '#818cf8', '#fbbf24', '#34d399', '#f472b6', '#ffffff'];
 
   useEffect(() => {
-    // পুরো অ্যাপ স্ক্রিন জুড়ে র্যান্ডমলি ৫০টি ডাইনামিক স্পার্কল জেনারেট করা হচ্ছে
     const generated = Array.from({ length: 50 }).map((_, i) => ({
       id: i,
       left: `${Math.random() * 100}%`,
       top: `${Math.random() * 100}%`,
-      size: Math.random() * 12 + 6, // ৬px থেকে ১৮px সাইজ
+      size: Math.random() * 12 + 6,
       color: colors[Math.floor(Math.random() * colors.length)],
       delay: Math.random() * 5,
-      duration: Math.random() * 3 + 2, // ২ থেকে ৫ সেকেন্ড লাইফসাইকেল
+      duration: Math.random() * 3 + 2,
     }));
     setParticles(generated);
   }, []);
@@ -83,7 +82,7 @@ function GlobalSparkleBackground() {
             scale: [0, 1, 1, 0],
             opacity: [0, 0.6, 0.6, 0],
             rotate: [0, 90, 180],
-            y: [0, -40], // হালকা ওপরের দিকে ড্র্রিফট বা ফ্লোট ইফেক্ট
+            y: [0, -40],
           }}
           transition={{
             duration: p.duration,
@@ -146,14 +145,12 @@ export default function App() {
     const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
       setUser(firebaseUser);
       if (firebaseUser) {
-        // Fetch matching UserProfile from Firestore
         const userDocRef = doc(db, 'users', firebaseUser.uid);
         const userDocSnap = await getDoc(userDocRef);
 
         if (userDocSnap.exists()) {
           setUserProfile(userDocSnap.data() as UserProfile);
         } else {
-          // Build fallback profile if for some reason missing
           const fallbackProfile: UserProfile = {
             uid: firebaseUser.uid,
             memberId: 'BGI-' + Math.floor(10000 + Math.random() * 90000),
@@ -188,11 +185,10 @@ export default function App() {
     return () => unsubscribe();
   }, []);
 
-  // Synchronize Firestore collections in real-time when user logs in
+  // Synchronize Firestore collections
   useEffect(() => {
     if (!user) return;
 
-    // 1. Listen to Registrations
     const regQuery = query(collection(db, 'registrations'), where('userId', '==', user.uid));
     const unsubscribeReg = onSnapshot(regQuery, (snapshot) => {
       const tickets: Ticket[] = [];
@@ -204,7 +200,6 @@ export default function App() {
       console.error('Error synchronizing registrations:', error);
     });
 
-    // 2. Listen to Complaints
     const compQuery = query(collection(db, 'complaints'), where('userId', '==', user.uid));
     const unsubscribeComp = onSnapshot(compQuery, (snapshot) => {
       const list: Complaint[] = [];
@@ -216,7 +211,6 @@ export default function App() {
       console.error('Error synchronizing complaints:', error);
     });
 
-    // 3. Listen to Notifications
     const notQuery = query(collection(db, 'notifications'), where('userId', '==', user.uid));
     const unsubscribeNotif = onSnapshot(notQuery, (snapshot) => {
       const list: AppNotification[] = [];
@@ -237,26 +231,20 @@ export default function App() {
 
   // Handle View Navigation
   const handleNavigate = (view: string) => {
-    // Join Us ক্লিকে সরাসরি গুগল ফর্মে রিডাইরেক্ট করবে
     if (view === 'join' || view === 'auth-join') {
       window.open('https://docs.google.com/forms/d/e/1FAIpQLSdO5TdKXWmAPXWrMTUL_uuoGUoA21ig8pLGMfSLPzNwBDhtOg/viewform', '_blank');
       return;
     }
-
     setActiveView(view);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // Sign In Trigger
   const handleLogin = async (email: string, pass: string) => {
     await signInWithEmailAndPassword(auth, email, pass);
   };
 
-  // Onboarding Registration trigger
   const handleRegister = async (data: any) => {
     const cred = await createUserWithEmailAndPassword(auth, data.email, data.password);
-    
-    // Create Profile document in Firestore
     const newProfile: UserProfile = {
       uid: cred.user.uid,
       memberId: 'BGI-' + Math.floor(10000 + Math.random() * 90000),
@@ -280,7 +268,6 @@ export default function App() {
     await setDoc(doc(db, 'users', cred.user.uid), newProfile);
     setUserProfile(newProfile);
 
-    // Write initial notification
     await addDoc(collection(db, 'notifications'), {
       userId: cred.user.uid,
       title: 'Welcome to BGI Community!',
@@ -290,21 +277,17 @@ export default function App() {
     });
   };
 
-  // Password Recovery Reset trigger
   const handleResetPassword = async (email: string) => {
     await sendPasswordResetEmail(auth, email);
   };
 
-  // Sign Out trigger
   const handleLogout = async () => {
     await signOut(auth);
     handleNavigate('home');
   };
 
-  // Register for Event trigger
   const handleRegisterEvent = async (event: any) => {
     if (!user) return;
-    
     const ticketId = 'TKT-' + Math.floor(100000 + Math.random() * 900000);
     const seatNumber = 'S-' + Math.floor(1 + Math.random() * 80);
 
@@ -324,7 +307,6 @@ export default function App() {
 
     await addDoc(collection(db, 'registrations'), newTicket);
 
-    // Create Notification
     await addDoc(collection(db, 'notifications'), {
       userId: user.uid,
       title: 'Event Ticket Generated',
@@ -334,7 +316,6 @@ export default function App() {
     });
   };
 
-  // Submit Complaint ticket trigger
   const handleSubmitComplaint = async (complaintData: any) => {
     if (!user) return;
     await addDoc(collection(db, 'complaints'), {
@@ -342,7 +323,6 @@ export default function App() {
       ...complaintData
     });
 
-    // Create Notification
     await addDoc(collection(db, 'notifications'), {
       userId: user.uid,
       title: 'Complaint Docket Filed',
@@ -352,13 +332,11 @@ export default function App() {
     });
   };
 
-  // Mark notification read trigger
   const handleMarkNotificationRead = async (id: string) => {
     const ref = doc(db, 'notifications', id);
     await updateDoc(ref, { read: true });
   };
 
-  // Update Profile log trigger
   const handleUpdateProfile = async (profileData: Partial<UserProfile>) => {
     if (!user) return;
     const ref = doc(db, 'users', user.uid);
@@ -366,7 +344,6 @@ export default function App() {
     setUserProfile(prev => prev ? { ...prev, ...profileData, profileCompletion: 100 } : null);
   };
 
-  // Change password trigger
   const handleChangePassword = async (pass: string) => {
     if (auth.currentUser) {
       await updatePassword(auth.currentUser, pass);
@@ -374,16 +351,15 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 bg-[radial-gradient(circle_at_0%_0%,rgba(99,102,241,0.05)_0%,transparent_50%),radial-gradient(circle_at_100%_100%,rgba(59,130,246,0.05)_0%,transparent_50%)] dark:bg-[#020617] dark:bg-[radial-gradient(circle_at_0%_0%,#1e1b4b_0%,transparent_50%),radial-gradient(circle_at_100%_0%,#312e81_0%,transparent_50%),radial-gradient(circle_at_100%_100%,#1e1b4b_0%,transparent_50%),radial-gradient(circle_at_0%_100%,#4338ca_0%,transparent_50%),#020617] transition-colors duration-300 flex flex-col justify-between relative overflow-hidden z-0">
+    {/* ফিক্সড: w-full এবং overflow-x-hidden যোগ করা হয়েছে যাতে স্ক্রিন ডান-বামে না নড়ে */}
+    <div className="w-full min-h-screen overflow-x-hidden bg-slate-50 bg-[radial-gradient(circle_at_0%_0%,rgba(99,102,241,0.05)_0%,transparent_50%),radial-gradient(circle_at_100%_100%,rgba(59,130,246,0.05)_0%,transparent_50%)] dark:bg-[#020617] dark:bg-[radial-gradient(circle_at_0%_0%,#1e1b4b_0%,transparent_50%),radial-gradient(circle_at_100%_0%,#312e81_0%,transparent_50%),radial-gradient(circle_at_100%_100%,#1e1b4b_0%,transparent_50%),radial-gradient(circle_at_0%_100%,#4338ca_0%,transparent_50%),#020617] transition-colors duration-300 flex flex-col justify-between relative z-0">
       
-      {/* গ্লোবাল স্পার্কল ব্যাকগ্রাউন্ড লেয়ার */}
       <GlobalSparkleBackground />
 
-      {/* Animated / Static Background Glowing Shapes matching the Frosted Glass theme */}
-      <div className="absolute top-[-10%] left-[10%] w-[400px] h-[400px] bg-indigo-500/10 dark:bg-indigo-500/20 rounded-full blur-[100px] pointer-events-none -z-10"></div>
-      <div className="absolute bottom-[-10%] right-[10%] w-[500px] h-[500px] bg-blue-600/5 dark:bg-blue-600/10 rounded-full blur-[120px] pointer-events-none -z-10"></div>
+      {/* রেসপন্সিভ গ্লোইং ব্যাকগ্রাউন্ড অবজেক্ট (মোবাইলে হাইড বা ছোট রাখা হয়েছে) */}
+      <div className="absolute top-[-10%] left-[5%] sm:left-[10%] w-[250px] sm:w-[400px] h-[250px] sm:h-[400px] bg-indigo-500/10 dark:bg-indigo-500/20 rounded-full blur-[60px] sm:blur-[100px] pointer-events-none -z-10"></div>
+      <div className="absolute bottom-[-10%] right-[5%] sm:right-[10%] w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] bg-blue-600/5 dark:bg-blue-600/10 rounded-full blur-[80px] sm:blur-[120px] pointer-events-none -z-10"></div>
 
-      {/* Dynamic Navbar */}
       <Navbar 
         activeView={activeView}
         onNavigate={handleNavigate}
@@ -396,15 +372,15 @@ export default function App() {
         onMarkNotificationRead={handleMarkNotificationRead}
       />
 
-      {/* Main Orchestrator Route Swapper Stage - Content elevated to z-10 over sparkles */}
-      <main className="flex-grow pt-16 relative z-10">
+      {/* ফিক্সড: px-3 বা px-4 যোগ করা হয়েছে যাতে সাব-ভিউ কন্টেন্টগুলো মোবাইলের স্ক্রিন এজ (Edge) স্পর্শ না করে */}
+      <main className="flex-grow pt-16 relative z-10 w-full max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
         {loading ? (
-          <div className="flex flex-col items-center justify-center min-h-[60vh] space-y-4">
+          <div className="flex flex-col items-center justify-center min-h-[60vh] px-4 text-center space-y-4">
             <span className="w-10 h-10 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin"></span>
-            <span className="text-xs font-mono tracking-widest text-indigo-500 uppercase">Synchronizing with BGI Secure Cluster</span>
+            <span className="text-xs sm:text-sm font-mono tracking-widest text-indigo-500 uppercase">Synchronizing with BGI Secure Cluster</span>
           </div>
         ) : (
-          <>
+          <div className="w-full">
             {activeView === 'home' && (
               <Hero onNavigate={handleNavigate} />
             )}
@@ -486,11 +462,10 @@ export default function App() {
                 onResetPassword={handleResetPassword}
               />
             )}
-          </>
+          </div>
         )}
       </main>
 
-      {/* Dynamic Footer */}
       <Footer onNavigate={handleNavigate} />
 
     </div>
