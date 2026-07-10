@@ -20,7 +20,7 @@ export default function ContactView() {
     const submissionData = {
       ...formData,
       // আপনার ইমেইলে সরাসরি মেসেজ পাঠানোর জন্য Web3Forms এর public access key
-      access_key: "ac984f1c-7c5c-430b-a9d5-2ad10578cd01" 
+      access_key: "de5b1775-6b14-4055-9845-be68089a583a" 
     };
 
     try {
