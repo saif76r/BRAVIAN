@@ -454,7 +454,7 @@ export default function Hero({ onNavigate }: HeroProps) {
 
             <div className="pt-4 border-t border-zinc-200 dark:border-white/5 flex items-center justify-between">
               <div>
-                <span className="block text-xs font-bold text-zinc-800 dark:text-white">Dr. Shahriar Khan</span>
+                <span className="block text-xs font-bold text-zinc-800 dark:text-white">Syed Aiman</span>
                 <span className="text-[10px] text-zinc-455 dark:text-zinc-400 font-medium">Co-Founder, BGI Community</span>
               </div>
             </div>
@@ -480,7 +480,7 @@ export default function Hero({ onNavigate }: HeroProps) {
             </div>
             
             <div className="space-y-1 lg:text-right">
-              <h3 className="text-xl font-bold font-sans text-zinc-900 dark:text-white">Dr. Shahriar Khan</h3>
+              <h3 className="text-xl font-bold font-sans text-zinc-900 dark:text-white">Syed Aiman</h3>
               <p className="text-xs text-sky-400 font-semibold tracking-wider uppercase">Co-Founder</p>
             </div>
           </div>

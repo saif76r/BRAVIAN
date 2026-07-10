@@ -26,15 +26,15 @@ export default function LeadershipView() {
 
   const coFounder = {
     id: 'co-founder',
-    name: 'Dr. Shahriar Khan',
+    name: 'Syed Aiman',
     designation: 'Co-Founder & Advisor',
     image: '/team/co-founder.jpg',
-    bio: 'Dr. Shahriar Khan is an academic scholar and researcher. He assists BGI in forming research lab partnerships, supervising IEEE publications, and designing peer-tutoring syllabi.',
+    bio: 'Syed Aiman is an academic scholar and researcher. He assists BGI in forming research lab partnerships, supervising IEEE publications, and designing peer-tutoring syllabi.',
     quote: 'Curiosity combined with rigorous, structured inquiry is the ultimate generator of breakthrough human progress.',
     facebook: 'https://facebook.com',
     linkedin: 'https://linkedin.com',
     email: 'co.founder@bgi-community.org',
-    signature: 'S. Khan'
+    signature: 'S. Aiman'
   };
 
   const ceo = {
