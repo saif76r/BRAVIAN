@@ -4,7 +4,7 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion'; // ফিক্সড: ‘motion/react’ এর বদলে স্ট্যান্ডার্ড ‘framer-motion’ ব্যবহার করা হয়েছে
+import { motion } from 'framer-motion'; 
 import { 
   onAuthStateChanged, 
   signInWithEmailAndPassword, 
@@ -60,11 +60,11 @@ function GlobalSparkleBackground() {
   const colors = ['#38bdf8', '#818cf8', '#fbbf24', '#34d399', '#f472b6', '#ffffff'];
 
   useEffect(() => {
-    const generated = Array.from({ length: 50 }).map((_, i) => ({
+    const generated = Array.from({ length: 40 }).map((_, i) => ({
       id: i,
       left: `${Math.random() * 100}%`,
       top: `${Math.random() * 100}%`,
-      size: Math.random() * 12 + 6,
+      size: Math.random() * 10 + 5,
       color: colors[Math.floor(Math.random() * colors.length)],
       delay: Math.random() * 5,
       duration: Math.random() * 3 + 2,
@@ -72,8 +72,9 @@ function GlobalSparkleBackground() {
     setParticles(generated);
   }, []);
 
+  {/* ফিক্সড: h-screen এবং w-screen ব্যবহার করে স্পার্কল ভিউপোর্টকে লক করা হয়েছে যাতে ইনফিনিটি স্ক্রোল না হয় */}
   return (
-    <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
+    <div className="fixed inset-0 w-screen h-screen pointer-events-none overflow-hidden z-0">
       {particles.map((p) => (
         <motion.svg
           key={p.id}
@@ -82,7 +83,7 @@ function GlobalSparkleBackground() {
             scale: [0, 1, 1, 0],
             opacity: [0, 0.6, 0.6, 0],
             rotate: [0, 90, 180],
-            y: [0, -40],
+            y: [0, -30],
           }}
           transition={{
             duration: p.duration,
@@ -351,7 +352,8 @@ export default function App() {
   };
 
   return (
-    <div className="w-full min-h-screen overflow-x-hidden bg-slate-50 bg-[radial-gradient(circle_at_0%_0%,rgba(99,102,241,0.05)_0%,transparent_50%),radial-gradient(circle_at_100%_100%,rgba(59,130,246,0.05)_0%,transparent_50%)] dark:bg-[#020617] dark:bg-[radial-gradient(circle_at_0%_0%,#1e1b4b_0%,transparent_50%),radial-gradient(circle_at_100%_0%,#312e81_0%,transparent_50%),radial-gradient(circle_at_100%_100%,#1e1b4b_0%,transparent_50%),radial-gradient(circle_at_0%_100%,#4338ca_0%,transparent_50%),#020617] transition-colors duration-300 flex flex-col justify-between relative z-0">
+    {/* ফিক্সড: w-full, max-w-full, overflow-x-hidden এবং গ্লোবাল overflow-y-auto নিশ্চিত করা হয়েছে যাতে কোনো অতিরিক্ত স্ক্রোল না আসে */}
+    <div className="w-full max-w-full min-h-screen overflow-x-hidden bg-slate-50 bg-[radial-gradient(circle_at_0%_0%,rgba(99,102,241,0.05)_0%,transparent_50%),radial-gradient(circle_at_100%_100%,rgba(59,130,246,0.05)_0%,transparent_50%)] dark:bg-[#020617] dark:bg-[radial-gradient(circle_at_0%_0%,#1e1b4b_0%,transparent_50%),radial-gradient(circle_at_100%_0%,#312e81_0%,transparent_50%),radial-gradient(circle_at_100%_100%,#1e1b4b_0%,transparent_50%),radial-gradient(circle_at_0%_100%,#4338ca_0%,transparent_50%),#020617] transition-colors duration-300 flex flex-col justify-between relative z-0">
       
       <GlobalSparkleBackground />
 
@@ -370,14 +372,14 @@ export default function App() {
         onMarkNotificationRead={handleMarkNotificationRead}
       />
 
-      <main className="flex-grow pt-16 relative z-10 w-full max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+      <main className="flex-grow pt-16 relative z-10 w-full max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 overflow-hidden">
         {loading ? (
           <div className="flex flex-col items-center justify-center min-h-[60vh] px-4 text-center space-y-4">
             <span className="w-10 h-10 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin"></span>
             <span className="text-xs sm:text-sm font-mono tracking-widest text-indigo-500 uppercase">Synchronizing with BGI Secure Cluster</span>
           </div>
         ) : (
-          <div className="w-full">
+          <div className="w-full h-full">
             {activeView === 'home' && (
               <Hero onNavigate={handleNavigate} />
             )}
