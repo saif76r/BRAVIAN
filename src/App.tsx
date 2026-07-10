@@ -239,7 +239,7 @@ export default function App() {
   const handleNavigate = (view: string) => {
     // Join Us ক্লিকে সরাসরি গুগল ফর্মে রিডাইরেক্ট করবে
     if (view === 'join' || view === 'auth-join') {
-      window.open('https://docs.google.com/forms/d/e/1FAIpQLSdO5TdKXWmAPXWrMTUL_uuoGUoA21ig8pLGMfSLPzNwBDhtOg/viewform', '_blank');
+      window.open('https://forms.gle/u5mGxcKSQNAtu7cm9', '_blank');
       return;
     }
 

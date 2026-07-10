@@ -235,26 +235,7 @@ export default function Hero({ onNavigate }: HeroProps) {
           </motion.div>
 
           {/* Micro Brands Cloud */}
-          <motion.div 
-            variants={{
-              hidden: { opacity: 0, y: 15 },
-              visible: { opacity: 1, y: 0, transition: { duration: 0.8 } }
-            }}
-            className="pt-8 border-t border-zinc-100 dark:border-zinc-900 w-full max-w-2xl mx-auto text-center space-y-4"
-          >
-            <p className="text-[10px] font-bold text-zinc-400 dark:text-zinc-500 uppercase tracking-widest">Community Backed By</p>
-            <div className="flex flex-wrap justify-center items-center gap-3 px-4">
-              {PARTNERS.map((p, idx) => (
-                <div 
-                  key={idx} 
-                  className="px-4 py-1.5 rounded-full bg-zinc-50/50 dark:bg-white/5 border border-zinc-200/60 dark:border-white/10 text-zinc-600 dark:text-zinc-400 font-sans font-extrabold text-xs tracking-tight backdrop-blur-sm hover:text-sky-500 dark:hover:text-sky-400 hover:border-sky-500/20 dark:hover:border-sky-400/20 hover:scale-105 transition-all duration-300 cursor-default shadow-sm"
-                >
-                  {p.name}
-                </div>
-              ))}
-            </div>
-          </motion.div>
-
+      
         </motion.div>
       </section>
 
