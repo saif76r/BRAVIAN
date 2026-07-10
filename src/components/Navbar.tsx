@@ -8,7 +8,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { 
   Search, Bell, Sun, Moon, LogIn, ChevronDown, Menu, X, 
   ArrowRight, Shield, Calendar, User, ClipboardList, Image, 
-  BookOpen, Star, HelpCircle, Trophy, Sparkles, MessageSquare, ExternalLink, Laptop
+  BookOpen, Star, HelpCircle, Trophy, Sparkles, MessageSquare, ExternalLink
 } from 'lucide-react';
 import { DEPARTMENTS, EVENTS } from '../data';
 import bgiLogo from '../assets/images/bgi_logo_1783613714921.png';
@@ -464,16 +464,6 @@ export default function Navbar({
                 </div>
               ) : (
                 <div className="flex items-center space-x-3">
-                  <a
-                    id="nav-login-btn"
-                    href="https://bgi-community.vercel.app/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hidden md:flex px-3.5 py-1.5 text-xs font-bold text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-white bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700 rounded-xl transition-all items-center space-x-1.5 shadow-sm"
-                  >
-                    <Laptop className="w-3.5 h-3.5 text-sky-500 dark:text-sky-400" />
-                    <span>My BGI Account</span>
-                  </a>
                   <button
                     id="nav-join-btn"
                     onClick={() => onNavigate('join')}
@@ -488,7 +478,7 @@ export default function Navbar({
               <button
                 id="mobile-menu-toggle"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="p-2 mr-4 rounded-xl text-zinc-500 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-900 lg:hidden"
+                className="p-2 rounded-xl text-zinc-500 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-900 lg:hidden"
               >
                 {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
               </button>
@@ -574,16 +564,6 @@ export default function Navbar({
                   </>
                 ) : (
                   <div className="pt-4 border-t border-zinc-200 dark:border-zinc-800 flex flex-col space-y-2 pl-3">
-                    <a
-                      href="https://bgi-community.vercel.app/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="w-full px-4 py-2 text-sm font-bold text-sky-600 dark:text-sky-400 border border-zinc-200 dark:border-zinc-800 rounded-xl bg-zinc-50 dark:bg-zinc-900 flex items-center justify-center space-x-1"
-                    >
-                      <Laptop className="w-4 h-4 shrink-0 text-sky-500 dark:text-sky-400" />
-                      <span>My BGI Account</span>
-                    </a>
                     <button
                       onClick={() => { onNavigate('join'); setMobileMenuOpen(false); }}
                       className="w-full px-4 py-2 text-sm font-extrabold text-white bg-gradient-to-r from-sky-600 to-sky-700 rounded-full shadow-[0_0_15px_rgba(56,189,248,0.2)] text-center"
@@ -616,7 +596,7 @@ export default function Navbar({
                     type="text"
                     placeholder="Search departments, events, history, activities..."
                     value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
+                    onChange={(e) => setSearchQuery(e.value)}
                     className="w-full bg-transparent border-none outline-none text-sm text-zinc-800 dark:text-white placeholder-zinc-400"
                     autoFocus
                   />
