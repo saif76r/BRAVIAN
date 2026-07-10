@@ -11,7 +11,7 @@ const DEPARTMENTS_DATA = [
     id: 'pr',
     name: 'PR Department',
     icon: 'Megaphone',
-    banner: 'public/banners/prb.jpg',
+    banner: '/banners/prb.jpg', // ফিক্সড: শুরুতে / যোগ করা হয়েছে
     description: 'The Public Relations Department leads external communication, media relations, brand representation, and community engagement for BGI Community.',
     responsibilities: ['Managing external communications and press releases', 'Maintaining relationships with university authorities', 'Drafting official community invitation letters'],
     projects: [{ name: 'Global Outreach 2026', desc: 'Expanding BGI presence in new international institutions.', status: 'Ongoing' }],
@@ -22,7 +22,7 @@ const DEPARTMENTS_DATA = [
     id: 'hr',
     name: 'HR Department',
     icon: 'Users',
-    banner: 'public/banners/hrb.jpg',
+    banner: '/banners/hrb.jpg', // ফিক্সড: শুরুতে / যোগ করা হয়েছে
     description: 'Manages internal human capital, onboarding operations, and member engagement performance across all sectors.',
     responsibilities: ['Conducting interview boards', 'Evaluating member performance reviews quarterly', 'Organizing leadership training sessions'],
     projects: [{ name: 'Onboarding 2026', desc: 'Streamlining recruitment pipeline workflows.', status: 'Completed' }],
@@ -33,7 +33,7 @@ const DEPARTMENTS_DATA = [
     id: 'it',
     name: 'IT Department',
     icon: 'Laptop',
-    banner: 'public/banners/itb.jpg',
+    banner: '/banners/itb.jpg', // ফিক্সড: শুরুতে / যোগ করা হয়েছে
     description: 'Builds and maintains the digital infrastructure, web portals, and software solutions for the BGI Ecosystem.',
     responsibilities: ['Developing open-source web application modules', 'Maintaining cloud hosting servers', 'Ensuring systemic data security protocol compliance'],
     projects: [{ name: 'BGI Portal Upgrades', desc: 'Migrating legacy client screens to optimized server setups.', status: 'Ongoing' }],
@@ -44,7 +44,7 @@ const DEPARTMENTS_DATA = [
     id: 'management',
     name: 'Management Department',
     icon: 'Briefcase',
-    banner: 'public/banners/mnb.jpg',
+    banner: '/banners/mnb.jpg', // ফিক্সড: শুরুতে / যোগ করা হয়েছে
     description: 'Oversees operations logistics, timing parameters, resource budgeting, and synchronization for all live execution runs.',
     responsibilities: ['Allocating structural tracking logistics', 'Supervising schedule flow sheets', 'Creating inter-departmental bridge pathways'],
     projects: [{ name: 'Summit Optimization', desc: 'Structuring asset pipelines for central events.', status: 'Completed' }],
@@ -61,7 +61,7 @@ const DEPARTMENTS_DATA = [
     id: 'communication',
     name: 'Communication Department',
     icon: 'MessageSquare',
-    banner: '/src/assets/banners/cb.jpg',
+    banner: '/banners/cb.jpg', // ফিক্সড: src/assets বাদ দিয়ে public রিলেটিভ করা হয়েছে
     description: 'Monitors public channels, handles queries, and distributes critical announcements across all digital touchpoints.',
     responsibilities: ['Handling corporate helpdesk emails', 'Structuring instant feedback protocols', 'Moderating global interactive forums'],
     projects: [{ name: 'Helpdesk Automation', desc: 'Deploying chat routing loops for rapid query settlement.', status: 'Ongoing' }],
@@ -72,7 +72,7 @@ const DEPARTMENTS_DATA = [
     id: 'creative-design',
     name: 'Creative & Design Department',
     icon: 'Palette',
-    banner: 'public/banners/cdb.jpg',
+    banner: '/banners/cdb.jpg', // ফিক্সড: শুরুতে / যোগ করা হয়েছে
     description: 'Designs UI systems, brand kits, video aesthetics, and promotional typography structures for all public campaigns.',
     responsibilities: ['Crafting visual design assets', 'Formatting brand typography frameworks', 'Directing rich media promotional video assets'],
     projects: [{ name: 'Brand Guide v3', desc: 'Overhauling structural theme patterns for 2026 rollouts.', status: 'Completed' }],
@@ -83,7 +83,7 @@ const DEPARTMENTS_DATA = [
     id: 'operation',
     name: 'Operation Department',
     icon: 'GitPullRequest',
-    banner: 'public/banners/opb.jpg',
+    banner: '/banners/opb.jpg', // ফিক্সড: শুরুতে / যোগ করা হয়েছে
     description: 'Manages on-ground configurations, immediate tactical deployments, and regional campus network activations.',
     responsibilities: ['Supervising on-field event installations', 'Managing vendor communication loops', 'Structuring security layouts for large crowds'],
     projects: [{ name: 'Regional Hub Launch', desc: 'Deploying operations teams to peripheral university structures.', status: 'Ongoing' }],
@@ -94,7 +94,7 @@ const DEPARTMENTS_DATA = [
     id: 'research',
     name: 'Research Department',
     icon: 'SearchCode',
-    banner: 'public/banners/rcb.jpg',
+    banner: '/banners/rcb.jpg', // ফিক্সড: শুরুতে / যোগ করা হয়েছে
     description: 'Fosters scholastic advancement through IEEE journals, peer-reviewed labs, and structured technical data tracking.',
     responsibilities: ['Reviewing methodology drafts', 'Coordinating peer-to-peer data science labs', 'Structuring journal publication pipelines'],
     projects: [{ name: 'Neural Net Modeling', desc: 'Testing low-resource speech datasets with academic partners.', status: 'Ongoing' }],
@@ -105,7 +105,7 @@ const DEPARTMENTS_DATA = [
     id: 'sports',
     name: 'Sports Department',
     icon: 'Trophy',
-    banner: 'public/banners/sb.jpg',
+    banner: '/banners/sb.jpg', // ফিক্সড: শুরুতে / যোগ করা হয়েছে
     description: 'Promotes athletic excellence and physical well-being through organized competitions, training programs, and community engagement.',
     responsibilities: ['Organizing inter-university tournaments', 'Coordinating athlete training sessions', 'Managing sports equipment and facilities'],
     projects: [{ name: 'Intra-University Championship', desc: 'Hosting a multi-day event for student athletes across different disciplines.', status: 'Ongoing' }],
@@ -116,7 +116,7 @@ const DEPARTMENTS_DATA = [
     id: 'emergency',
     name: 'Emergency Department',
     icon: 'ShieldAlert',
-    banner: 'public/banners/eb.jpg',
+    banner: '/banners/eb.jpg', // ফিক্সড: শুরুতে / যোগ করা হয়েছে
     description: 'A rapid response force managing critical operational crises, immediate medical relief workflows, and community support lines.',
     responsibilities: ['Deploying immediate crisis mitigation protocols', 'Coordinating mutual aid logistics under strict time caps', 'Monitoring community safety signals'],
     projects: [{ name: 'Relief Grid 2026', desc: 'Setting up standby resource lines for immediate distribution.', status: 'Ongoing' }],
@@ -147,9 +147,10 @@ export default function DepartmentView({ initialDeptId }: DepartmentViewProps) {
 
   const ActiveIcon = iconMap[activeDept.icon] || BookOpen;
 
-  // Resolves images cleanly from the src/assets/team directory based on structural keys
+  // Resolves images cleanly from the public/team directory based on structural keys
   const getHeadImageUrl = (imageKey: string) => {
-    return `/src/assets/team/${imageKey}`;
+    // ফিক্সড: /src/assets/team/ বাদ দিয়ে সরাসরি /team/ করা হয়েছে
+    return `/team/${imageKey}`;
   };
 
   return (
@@ -268,7 +269,7 @@ export default function DepartmentView({ initialDeptId }: DepartmentViewProps) {
             {/* Department Head Profile Section */}
             <div className="md:col-span-1">
               
-              {/* Leader profile linking image into src/assets/team/ */}
+              {/* Leader profile linking image into public/team/ */}
               <div className="p-5 rounded-2xl border border-zinc-200/50 dark:border-zinc-800 bg-white dark:bg-zinc-950 text-center space-y-4 shadow-sm">
                 <span className="text-[9px] font-mono font-bold text-emerald-500 uppercase tracking-widest block">Department Head</span>
                 <div className="w-20 h-20 rounded-full overflow-hidden mx-auto border-2 border-emerald-500 p-[2px]">

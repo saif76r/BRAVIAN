@@ -10,12 +10,12 @@ import { Facebook, Linkedin, Mail, Users, Quote, ArrowUpRight } from 'lucide-rea
 export default function LeadershipView() {
   const [selectedLeader, setSelectedLeader] = useState<any | null>(null);
 
-  // Core Executive Data - Simple File Names
+  // Core Executive Data - Simple File Names (ফিক্সড: public/ বাদ দিয়ে /team/... করা হয়েছে)
   const founder = {
     id: 'founder',
     name: 'SAT  Sanjid',
     designation: 'Founder & Chairman, BGI Community',
-    image: '/src/assets/team/founder.jpg',
+    image: '/team/founder.jpg',
     bio: 'SAT  Sanjid is a veteran technology leader and philanthropist. He founded BGI in 2021 with the vision of bridging the gap between textbook education and practical industrial operations.',
     quote: 'The true strength of a community is measured not by its wealth, but by its capacity to lift members when they fall.',
     facebook: 'https://www.facebook.com/syed.sanjid.37',
@@ -28,7 +28,7 @@ export default function LeadershipView() {
     id: 'co-founder',
     name: 'Dr. Shahriar Khan',
     designation: 'Co-Founder & Advisor',
-    image: '/src/assets/team/co-founder.jpg',
+    image: '/team/co-founder.jpg',
     bio: 'Dr. Shahriar Khan is an academic scholar and researcher. He assists BGI in forming research lab partnerships, supervising IEEE publications, and designing peer-tutoring syllabi.',
     quote: 'Curiosity combined with rigorous, structured inquiry is the ultimate generator of breakthrough human progress.',
     facebook: 'https://facebook.com',
@@ -41,7 +41,7 @@ export default function LeadershipView() {
     id: 'ceo',
     name: 'Sumaiya Akter Onima',
     designation: 'Chief Executive Officer',
-    image: '/src/assets/team/ceo.jpg',
+    image: '/team/ceo.jpg',
     bio: 'Sumaiya Akter Onima oversees day-to-day operations across all 13 BGI departments. She manages financial audits, external press releases, and coordinates with university administrations.',
     quote: 'Leadership is not about a position; it is about taking full accountability for outcomes and inspiring teams to excel.',
     facebook: 'https://www.facebook.com/sumaiya.akter.onima.2024',
@@ -50,13 +50,13 @@ export default function LeadershipView() {
     signature: 'S. Onima'
   };
 
-  // New Advisors Data
+  // New Advisors Data (ফিক্সড: public/ বাদ দেওয়া হয়েছে)
   const advisors = [
     {
       id: 'advisor-1',
       name: 'Dr. Shamsul Arefin',
       designation: 'Chief Advisor, BGI',
-      image: '/src/assets/team/ad1.jpg',
+      image: '/team/ad1.jpg',
       bio: 'Brief description and professional background of the first advisor goes here.',
       quote: 'Inspiring wisdom and guidance fuels the community towards sustainable development.',
       facebook: 'https://facebook.com',
@@ -68,7 +68,7 @@ export default function LeadershipView() {
       id: 'advisor-2',
       name: 'Nahida Akter Pinky',
       designation: 'Advisor, BGI',
-      image: '/src/assets/team/ad2.jpg',
+      image: '/team/ad2.jpg',
       bio: 'Brief description and professional background of the second advisor goes here.',
       quote: 'Strategic mentorship bridges the potential of youths with corporate benchmarks.',
       facebook: 'https://facebook.com',
@@ -78,60 +78,58 @@ export default function LeadershipView() {
     }
   ];
 
-  // 4 General Secretaries / Executive Members
+  // 4 General Secretaries / Executive Members (ফিক্সড: public/ বাদ দেওয়া হয়েছে)
   const generalSecretaries = [
     {
       name: 'Afrina Haque',
       role: 'General Secretary',
       email: 'afrinahaqueofficial@gmail.com',
-      image: '/src/assets/team/afrina.jpg'
+      image: '/team/afrina.jpg'
     },
     {
       name: 'Aannafi Hossain',
       role: 'Additional General Secretary',
       email: 'hossainaannafi2004@gmail.com',
-      image: '/src/assets/team/annafi.jpg'
+      image: '/team/annafi.jpg'
     },
     {
       name: 'Sunerah Jahan',
       role: 'Assistant General Secretary',
       email: 'vp@bgi-community.org',
-      image: '/src/assets/team/sunerah.jpg'
+      image: '/team/sunerah.jpg'
     },
     {
       name: 'Waheda Rahman',
       role: 'AssistantJoint Secretary',
       email: 'angelwahedarahman89@gmail.com',
-      image: '/src/assets/team/waheda.jpg'
-    }
-    ,
+      image: '/team/waheda.jpg'
+    },
     {
       name: 'Asma Sultana Minan ',
       role: 'Internal Joint Secretary',
       email: 'asma.globalunityfoundation@gmail.com',
-      image: '/src/assets/team/minan.jpg'
-    }
-    ,
+      image: '/team/minan.jpg'
+    },
     {
       name: 'Abdullah Al Hasib ',
       role: 'Executive Secretary',
       email: 'treasurer@bgi-community.org',
-      image: '/src/assets/team/hasib.jpg'
+      image: '/team/hasib.jpg'
     }
   ];
 
-  // Department Heads
+  // Department Heads (ফিক্সড: public/ বাদ দেওয়া হয়েছে)
   const departmentHeads = [
-    { name: 'Aiman Akil', role: 'Dept Head PR, Marketing & collabration', image: '/src/assets/team/aiman.jpg' },
-    { name: 'Asma Sultana Minan', role: 'HR Dept Head', image: '/src/assets/team/minan.jpg' },
-    { name: 'S.M. Miftahul Islam', role: 'Dept Head IT', image: '/src/assets/team/mif.jpg' },
-    { name: 'Afsana Siddika Mim', role: 'Dept Head Management', image: '/src/assets/team/mim.jpg' },
-    { name: 'Jannatul Maowa', role: 'Dept Head Communication', image: '/src/assets/team/jannat.jpg' },
-    { name: 'Nazia Amrin Taha', role: 'Dept Head Operation ', image: '/src/assets/team/taha.jpg' },
-    { name: 'Saima Islam Eti', role: 'Dept Head Research', image: '/src/assets/team/rch.jpg' },
-    { name: 'Farjana Nayeem', role: 'Dept Head Sports', image: '/src/assets/team/farjana.jpg' },
-    { name: 'Jabed Mia', role: 'Dept Head Emergency', image: '/src/assets/team/jabed.jpg' },
-    { name: 'Jinia Akter', role: 'Dept Head Creative & Design', image: '/src/assets/team/jinia.jpg' },
+    { name: 'Aiman Akil', role: 'Dept Head PR, Marketing & collabration', image: '/team/aiman.jpg' },
+    { name: 'Asma Sultana Minan', role: 'HR Dept Head', image: '/team/minan.jpg' },
+    { name: 'S.M. Miftahul Islam', role: 'Dept Head IT', image: '/team/mif.jpg' },
+    { name: 'Afsana Siddika Mim', role: 'Dept Head Management', image: '/team/mim.jpg' },
+    { name: 'Jannatul Maowa', role: 'Dept Head Communication', image: '/team/jannat.jpg' },
+    { name: 'Nazia Amrin Taha', role: 'Dept Head Operation ', image: '/team/taha.jpg' },
+    { name: 'Saima Islam Eti', role: 'Dept Head Research', image: '/team/rch.jpg' },
+    { name: 'Farjana Nayeem', role: 'Dept Head Sports', image: '/team/farjana.jpg' },
+    { name: 'Jabed Mia', role: 'Dept Head Emergency', image: '/team/jabed.jpg' },
+    { name: 'Jinia Akter', role: 'Dept Head Creative & Design', image: '/team/jinia.jpg' },
   ];
 
   const LeaderCard = ({ leader }: { leader: any }) => (
@@ -242,7 +240,6 @@ export default function LeadershipView() {
                   />
                 </div>
                 <div className="space-y-1">
-                  <span className="text-[8px] font-mono font-bold text-zinc-400 uppercase tracking-tight block">{member.dept}</span>
                   <h4 className="text-xs font-bold text-zinc-800 dark:text-zinc-100 leading-tight truncate" title={member.name}>
                     {member.name}
                   </h4>
