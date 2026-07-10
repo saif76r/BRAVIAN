@@ -4,7 +4,7 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion'; 
+import { motion } from 'motion/react'; // আপনার আসল ইমপোর্টই রাখা হলো
 import { 
   onAuthStateChanged, 
   signInWithEmailAndPassword, 
@@ -60,11 +60,11 @@ function GlobalSparkleBackground() {
   const colors = ['#38bdf8', '#818cf8', '#fbbf24', '#34d399', '#f472b6', '#ffffff'];
 
   useEffect(() => {
-    const generated = Array.from({ length: 40 }).map((_, i) => ({
+    const generated = Array.from({ length: 50 }).map((_, i) => ({
       id: i,
       left: `${Math.random() * 100}%`,
       top: `${Math.random() * 100}%`,
-      size: Math.random() * 10 + 5,
+      size: Math.random() * 12 + 6,
       color: colors[Math.floor(Math.random() * colors.length)],
       delay: Math.random() * 5,
       duration: Math.random() * 3 + 2,
@@ -72,9 +72,8 @@ function GlobalSparkleBackground() {
     setParticles(generated);
   }, []);
 
-  {/* ফিক্সড: h-screen এবং w-screen ব্যবহার করে স্পার্কল ভিউপোর্টকে লক করা হয়েছে যাতে ইনফিনিটি স্ক্রোল না হয় */}
   return (
-    <div className="fixed inset-0 w-screen h-screen pointer-events-none overflow-hidden z-0">
+    <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
       {particles.map((p) => (
         <motion.svg
           key={p.id}
@@ -83,7 +82,7 @@ function GlobalSparkleBackground() {
             scale: [0, 1, 1, 0],
             opacity: [0, 0.6, 0.6, 0],
             rotate: [0, 90, 180],
-            y: [0, -30],
+            y: [0, -40],
           }}
           transition={{
             duration: p.duration,
@@ -121,17 +120,14 @@ export default function App() {
     return localStorage.getItem('darkMode') === 'true';
   });
 
-  // Authentication State
   const [user, setUser] = useState<any | null>(null);
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
-  // Firestore Synchronized State
   const [registeredTickets, setRegisteredTickets] = useState<Ticket[]>([]);
   const [complaints, setComplaints] = useState<Complaint[]>([]);
   const [notifications, setNotifications] = useState<AppNotification[]>([]);
 
-  // Monitor dark mode class change
   useEffect(() => {
     if (darkMode) {
       document.documentElement.classList.add('dark');
@@ -141,7 +137,6 @@ export default function App() {
     localStorage.setItem('darkMode', String(darkMode));
   }, [darkMode]);
 
-  // Auth Observer
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
       setUser(firebaseUser);
@@ -186,7 +181,6 @@ export default function App() {
     return () => unsubscribe();
   }, []);
 
-  // Synchronize Firestore collections
   useEffect(() => {
     if (!user) return;
 
@@ -230,7 +224,6 @@ export default function App() {
     };
   }, [user]);
 
-  // Handle View Navigation
   const handleNavigate = (view: string) => {
     if (view === 'join' || view === 'auth-join') {
       window.open('https://docs.google.com/forms/d/e/1FAIpQLSdO5TdKXWmAPXWrMTUL_uuoGUoA21ig8pLGMfSLPzNwBDhtOg/viewform', '_blank');
@@ -352,13 +345,13 @@ export default function App() {
   };
 
   return (
-    {/* ফিক্সড: w-full, max-w-full, overflow-x-hidden এবং গ্লোবাল overflow-y-auto নিশ্চিত করা হয়েছে যাতে কোনো অতিরিক্ত স্ক্রোল না আসে */}
-    <div className="w-full max-w-full min-h-screen overflow-x-hidden bg-slate-50 bg-[radial-gradient(circle_at_0%_0%,rgba(99,102,241,0.05)_0%,transparent_50%),radial-gradient(circle_at_100%_100%,rgba(59,130,246,0.05)_0%,transparent_50%)] dark:bg-[#020617] dark:bg-[radial-gradient(circle_at_0%_0%,#1e1b4b_0%,transparent_50%),radial-gradient(circle_at_100%_0%,#312e81_0%,transparent_50%),radial-gradient(circle_at_100%_100%,#1e1b4b_0%,transparent_50%),radial-gradient(circle_at_0%_100%,#4338ca_0%,transparent_50%),#020617] transition-colors duration-300 flex flex-col justify-between relative z-0">
+    /* ফিক্সড: এখানে শুধু 'w-full max-w-full overflow-x-hidden' যোগ করা হয়েছে যা মোবাইলের সাইড স্ক্রোলিং ও বাড়তি স্ক্রোল পুরোপুরি বন্ধ করবে */
+    <div className="w-full max-w-full overflow-x-hidden min-h-screen bg-slate-50 bg-[radial-gradient(circle_at_0%_0%,rgba(99,102,241,0.05)_0%,transparent_50%),radial-gradient(circle_at_100%_100%,rgba(59,130,246,0.05)_0%,transparent_50%)] dark:bg-[#020617] dark:bg-[radial-gradient(circle_at_0%_0%,#1e1b4b_0%,transparent_50%),radial-gradient(circle_at_100%_0%,#312e81_0%,transparent_50%),radial-gradient(circle_at_100%_100%,#1e1b4b_0%,transparent_50%),radial-gradient(circle_at_0%_100%,#4338ca_0%,transparent_50%),#020617] transition-colors duration-300 flex flex-col justify-between relative z-0">
       
       <GlobalSparkleBackground />
 
-      <div className="absolute top-[-10%] left-[5%] sm:left-[10%] w-[250px] sm:w-[400px] h-[250px] sm:h-[400px] bg-indigo-500/10 dark:bg-indigo-500/20 rounded-full blur-[60px] sm:blur-[100px] pointer-events-none -z-10"></div>
-      <div className="absolute bottom-[-10%] right-[5%] sm:right-[10%] w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] bg-blue-600/5 dark:bg-blue-600/10 rounded-full blur-[80px] sm:blur-[120px] pointer-events-none -z-10"></div>
+      <div className="absolute top-[-10%] left-[10%] w-[400px] h-[400px] bg-indigo-500/10 dark:bg-indigo-500/20 rounded-full blur-[100px] pointer-events-none -z-10"></div>
+      <div className="absolute bottom-[-10%] right-[10%] w-[500px] h-[500px] bg-blue-600/5 dark:bg-blue-600/10 rounded-full blur-[120px] pointer-events-none -z-10"></div>
 
       <Navbar 
         activeView={activeView}
@@ -372,14 +365,15 @@ export default function App() {
         onMarkNotificationRead={handleMarkNotificationRead}
       />
 
-      <main className="flex-grow pt-16 relative z-10 w-full max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 overflow-hidden">
+      {/* ফিক্সড: 'w-full px-4' দেওয়া হয়েছে যাতে ছোট স্ক্রিনের ডিভাইসে কন্টেন্ট দুই পাশে চিপে না যায় */}
+      <main className="flex-grow pt-16 relative z-10 w-full px-4 mx-auto max-w-7xl">
         {loading ? (
-          <div className="flex flex-col items-center justify-center min-h-[60vh] px-4 text-center space-y-4">
+          <div className="flex flex-col items-center justify-center min-h-[60vh] space-y-4">
             <span className="w-10 h-10 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin"></span>
-            <span className="text-xs sm:text-sm font-mono tracking-widest text-indigo-500 uppercase">Synchronizing with BGI Secure Cluster</span>
+            <span className="text-xs font-mono tracking-widest text-indigo-500 uppercase">Synchronizing with BGI Secure Cluster</span>
           </div>
         ) : (
-          <div className="w-full h-full">
+          <>
             {activeView === 'home' && (
               <Hero onNavigate={handleNavigate} />
             )}
@@ -461,7 +455,7 @@ export default function App() {
                 onResetPassword={handleResetPassword}
               />
             )}
-          </div>
+          </>
         )}
       </main>
 
