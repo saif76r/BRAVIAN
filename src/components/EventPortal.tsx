@@ -29,7 +29,7 @@ const EVENTS = [
     category: 'CULTURAL',
     date: '2026-03-20',
     venue: 'BGI Grand Convention Hall, Dhaka',
-    image: 'https://images.unsplash.com/photo-1661994215679-cde7c2c5c060?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', 
+    image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=500', 
     seatsRemaining: 0,
     status: 'Past'
   },
@@ -40,7 +40,29 @@ const EVENTS = [
     category: 'CULTURAL',
     date: '2026-02-15',
     venue: 'BGI Grand Convention Hall, Dhaka',
-    image: 'https://english.news.cn/20220122/36e85e938b6d4ae295512cfa4681c4e9/2022012236e85e938b6d4ae295512cfa4681c4e9_ad97b354-d080-463f-8e63-22344804bcc8.jpg', 
+    image: 'https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?q=80&w=500', 
+    seatsRemaining: 0,
+    status: 'Past'
+  },
+  {
+    id: 'debate-workshop-2025',
+    title: 'Workshop on Debate Competition',
+    description: 'An intensive training session focused on enhancing logical reasoning, public speaking, and strategic argumentation for aspiring debaters in the BGI Community.',
+    category: 'EDUCATION',
+    date: '2025-05-03',
+    venue: 'BGI Seminar Hall, Dhaka',
+    image: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=500', 
+    seatsRemaining: 0,
+    status: 'Past'
+  },
+  {
+    id: 'seminar-woman-child-2026',
+    title: 'Seminar in Ministry of Woman & Child',
+    description: 'An insightful seminar addressing key development strategies, community welfare programs, and collaborative initiatives with the Ministry.',
+    category: 'EDUCATION',
+    date: '2026-01-17',
+    venue: 'Ministry Auditorium, Dhaka',
+    image: 'https://images.unsplash.com/photo-1431540015161-0bf868a2d407?q=80&w=500', 
     seatsRemaining: 0,
     status: 'Past'
   }
@@ -88,7 +110,7 @@ const CULTURAL_GALLERY_IMAGES = [
   '/gallery/Cultural Programs_BGI Cultural Fest 2026_2026-02-20_22.jpg',
   '/gallery/Cultural Programs_BGI Cultural Fest 2026_2026-02-20_23.jpg',
   '/gallery/Cultural Programs_BGI Cultural Fest 2026_2026-02-20_24.jpg',
-  '/gallery/Cultural Programs_BGI Cultural Fest 2026_2026-02-20_25.jpg',
+  '/gallery/Cultural Programs_BGI Cultural Fest 2026_2026-02-20_25.jpg',  
   '/gallery/Cultural Programs_BGI Cultural Fest 2026_2026-02-20_26.jpg',
   '/gallery/Cultural Programs_BGI Cultural Fest 2026_2026-02-20_27.jpg',
   '/gallery/Cultural Programs_BGI Cultural Fest 2026_2026-02-20_28.jpg',
@@ -99,6 +121,30 @@ const CULTURAL_GALLERY_IMAGES = [
   '/gallery/Cultural Programs_BGI Cultural Fest 2026_2026-02-20_33.jpg',
   '/gallery/Cultural Programs_BGI Cultural Fest 2026_2026-02-20_34.jpg',
   '/gallery/Cultural Programs_BGI Cultural Fest 2026_2026-02-20_35.jpg',
+
+];
+
+// ডিবেট কম্পিটিশন ওয়ার্কশপের ইমেজ লিস্ট
+const DEBATE_GALLERY_IMAGES = [
+  '/gallery/Workshop_Debate Competition_2025-05-03.jpg',
+  '/gallery/Workshop_Debate Competition_2025-05-03_1.jpg',
+  '/gallery/Workshop_Debate Competition_2025-05-03_2.jpg',
+  '/gallery/Workshop_Debate Competition_2025-05-03_3.jpg',
+  '/gallery/Workshop_Debate Competition_2025-05-03_4.jpg',
+  '/gallery/Workshop_Debate Competition_2025-05-03_5.jpg',
+  '/gallery/Workshop_Debate Competition_2025-05-03_6.jpg',
+];
+
+// মিনিস্ট্রি অব ওমেন অ্যান্ড চাইল্ড সেমিনারের ইমেজ লিস্ট
+const SEMINAR_WOMAN_CHILD_IMAGES = [
+  '/gallery/Seminars_Ministry of Woman & Child_2026-01-17.jpg',
+  '/gallery/Seminars_Ministry of Woman & Child_2026-01-17_1.jpg',
+  '/gallery/Seminars_Ministry of Woman & Child_2026-01-17_2.jpg',
+  '/gallery/Seminars_Ministry of Woman & Child_2026-01-17_3.jpg',
+  '/gallery/Seminars_Ministry of Woman & Child_2026-01-17_4.jpg',
+  '/gallery/Seminars_Ministry of Woman & Child_2026-01-17_5.jpg',
+  '/gallery/Seminars_Ministry of Woman & Child_2026-01-17_6.jpg',
+  '/gallery/Seminars_Ministry of Woman & Child_2026-01-17_7.jpg',
 ];
 
 interface EventPortalProps {
@@ -213,7 +259,14 @@ export default function EventPortal({
   };
 
   // Determine which images to show in the modal based on active event ID
-  const currentGalleryImages = activeEventId === 'cultural-fest-2026' ? CULTURAL_GALLERY_IMAGES : IFTER_GALLERY_IMAGES;
+  const getGalleryImages = () => {
+    if (activeEventId === 'seminar-woman-child-2026') return SEMINAR_WOMAN_CHILD_IMAGES;
+    if (activeEventId === 'debate-workshop-2025') return DEBATE_GALLERY_IMAGES;
+    if (activeEventId === 'cultural-fest-2026') return CULTURAL_GALLERY_IMAGES;
+    return IFTER_GALLERY_IMAGES;
+  };
+
+  const currentGalleryImages = getGalleryImages();
 
   return (
     <div id="events-portal-container" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-left relative">
@@ -466,7 +519,7 @@ export default function EventPortal({
                 </button>
               </div>
 
-              {/* Image Grid Layout (Dynamic images based on selection) */}
+              {/* Image Grid Layout */}
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                 {currentGalleryImages.map((src, index) => (
                   <div 
