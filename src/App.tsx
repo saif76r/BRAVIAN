@@ -4,7 +4,7 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion'; // ফিক্সড: ‘motion/react’ এর বদলে স্ট্যান্ডার্ড ‘framer-motion’ ব্যবহার করা হয়েছে
 import { 
   onAuthStateChanged, 
   signInWithEmailAndPassword, 
@@ -351,12 +351,10 @@ export default function App() {
   };
 
   return (
-    {/* ফিক্সড: w-full এবং overflow-x-hidden যোগ করা হয়েছে যাতে স্ক্রিন ডান-বামে না নড়ে */}
     <div className="w-full min-h-screen overflow-x-hidden bg-slate-50 bg-[radial-gradient(circle_at_0%_0%,rgba(99,102,241,0.05)_0%,transparent_50%),radial-gradient(circle_at_100%_100%,rgba(59,130,246,0.05)_0%,transparent_50%)] dark:bg-[#020617] dark:bg-[radial-gradient(circle_at_0%_0%,#1e1b4b_0%,transparent_50%),radial-gradient(circle_at_100%_0%,#312e81_0%,transparent_50%),radial-gradient(circle_at_100%_100%,#1e1b4b_0%,transparent_50%),radial-gradient(circle_at_0%_100%,#4338ca_0%,transparent_50%),#020617] transition-colors duration-300 flex flex-col justify-between relative z-0">
       
       <GlobalSparkleBackground />
 
-      {/* রেসপন্সিভ গ্লোইং ব্যাকগ্রাউন্ড অবজেক্ট (মোবাইলে হাইড বা ছোট রাখা হয়েছে) */}
       <div className="absolute top-[-10%] left-[5%] sm:left-[10%] w-[250px] sm:w-[400px] h-[250px] sm:h-[400px] bg-indigo-500/10 dark:bg-indigo-500/20 rounded-full blur-[60px] sm:blur-[100px] pointer-events-none -z-10"></div>
       <div className="absolute bottom-[-10%] right-[5%] sm:right-[10%] w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] bg-blue-600/5 dark:bg-blue-600/10 rounded-full blur-[80px] sm:blur-[120px] pointer-events-none -z-10"></div>
 
@@ -372,7 +370,6 @@ export default function App() {
         onMarkNotificationRead={handleMarkNotificationRead}
       />
 
-      {/* ফিক্সড: px-3 বা px-4 যোগ করা হয়েছে যাতে সাব-ভিউ কন্টেন্টগুলো মোবাইলের স্ক্রিন এজ (Edge) স্পর্শ না করে */}
       <main className="flex-grow pt-16 relative z-10 w-full max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
         {loading ? (
           <div className="flex flex-col items-center justify-center min-h-[60vh] px-4 text-center space-y-4">
