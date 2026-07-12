@@ -118,18 +118,30 @@ export default function LeadershipView() {
     }
   ];
 
-  // Department Heads (ফিক্সড: public/ বাদ দেওয়া হয়েছে)
+  // Department Heads 
   const departmentHeads = [
-    { name: 'Aiman Akil', role: 'Dept Head PR, Marketing & collabration', image: '/team/aiman.jpg' },
-    { name: 'Asma Sultana Minan', role: 'HR Dept Head', image: '/team/minan.jpg' },
-    { name: 'S.M. Miftahul Islam', role: 'Dept Head IT', image: '/team/mif.jpg' },
-    { name: 'Afsana Siddika Mim', role: 'Dept Head Management', image: '/team/mim.jpg' },
-    { name: 'Jannatul Maowa', role: 'Dept Head Communication', image: '/team/jannat.jpg' },
-    { name: 'Nazia Amrin Taha', role: 'Dept Head Operation ', image: '/team/taha.jpg' },
-    { name: 'Saima Islam Eti', role: 'Dept Head Research', image: '/team/rch.jpg' },
-    { name: 'Farjana Nayeem', role: 'Dept Head Sports', image: '/team/farjana.jpg' },
-    { name: 'Jabed Mia', role: 'Dept Head Emergency', image: '/team/jabed.jpg' },
-    { name: 'Jinia Akter', role: 'Dept Head Creative & Design', image: '/team/jinia.jpg' },
+    { name: 'Aiman Akil', role: 'Department Head PR, Marketing & collabration', image: '/team/aiman.jpg' },
+    { name: 'Asma Sultana Minan', role: 'HR Department Head', image: '/team/minan.jpg' },
+    { name: 'S.M. Miftahul Islam', role: 'Department Head IT', image: '/team/mif.jpg' },
+    { name: 'Afsana Siddika Mim', role: 'Department Head Management', image: '/team/mim.jpg' },
+    { name: 'Jannatul Maowa', role: 'Department Head Communication', image: '/team/jannat.jpg' },
+    { name: 'Nazia Amrin Taha', role: 'Department Head Operation ', image: '/team/taha.jpg' },
+    { name: 'Saima Islam Eti', role: 'Department Head Research', image: '/team/rch.jpg' },
+    { name: 'Farjana Nayeem', role: 'Department Head Sports', image: '/team/farjana.jpg' },
+    { name: 'Jabed Mia', role: 'Department Head Emergency', image: '/team/Jabed.jpg' },
+    { name: 'Jinia Akter', role: 'Department Head Creative & Design', image: '/team/jinia.jpg' },
+  ];
+
+
+   const assistantDepartmentHeads = [
+    { name: 'Tahsen Tabassum Sthirota', role: 'Assistant Department Head PR, Marketing & collabration', image: '/team/tabassum.jpg' },
+    { name: 'Ayshe Nath', role: 'Assistant Department Head HR', image: '/team/ayshe.jpg' },
+    { name: 'Meer Md. Saif', role: 'Assistant Department Head IT', image: '/team/saif.jpg' },
+    { name: 'Anika Rahman', role: 'Assistant Department Head Management', image: '/team/anika.jpg' },
+    { name: 'Lamia Akter Norin', role: 'Assistant Department Head Research', image: '/team/lamia.jpg' },
+    { name: 'Karishma', role: 'Assistant Department Head Emergency', image: '/team/karishma.jpg' },
+    { name: 'Fariya Abedin', role: 'Assistant Department Head Creative & Design', image: '/team/fariya.jpg' },
+    { name: 'Mahbuba Akter Alpha', role: 'Assistant Department Head Creative & Design', image: '/team/mahbuba.jpg' },
   ];
 
   const LeaderCard = ({ leader }: { leader: any }) => (
@@ -262,6 +274,43 @@ export default function LeadershipView() {
 
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-6">
             {departmentHeads.map((member, idx) => (
+              <div 
+                key={idx}
+                className="group rounded-2xl border border-zinc-200/50 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-3 sm:p-4 text-center space-y-3 hover:shadow-xl hover:scale-[1.02] transition-all duration-350"
+              >
+                <div className="relative w-20 h-20 mx-auto rounded-full overflow-hidden bg-zinc-50 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-850">
+                  <img 
+                    src={member.image} 
+                    alt={member.name} 
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                </div>
+                <div className="space-y-1">
+                  <h4 className="text-xs font-bold text-zinc-800 dark:text-zinc-100 leading-tight truncate" title={member.name}>
+                    {member.name}
+                  </h4>
+                  <p className="text-[9px] font-mono font-bold text-emerald-500 uppercase tracking-wide">
+                    {member.role}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+
+      <section className="space-y-12 pt-12 border-t border-zinc-100 dark:border-zinc-900">
+
+              {/* Subsection 3: Assistent Department Heads Grid */}
+        <div className="space-y-6 pt-6">
+          <div className="flex items-center space-x-2 border-b border-zinc-100 dark:border-zinc-900 pb-2">
+            <Users className="w-4 h-4 text-emerald-500" />
+            <h3 className="font-sans font-bold text-sm text-zinc-700 dark:text-zinc-300 uppercase tracking-wider">Assistant Department Heads</h3>
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-6">
+            {assistantDepartmentHeads.map((member, idx) => (
               <div 
                 key={idx}
                 className="group rounded-2xl border border-zinc-200/50 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-3 sm:p-4 text-center space-y-3 hover:shadow-xl hover:scale-[1.02] transition-all duration-350"

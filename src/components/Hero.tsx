@@ -745,9 +745,9 @@ export default function Hero({ onNavigate }: HeroProps) {
         {/* Video Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {[
-            { id: 1, title: "Strategic Planning Session", category: "Core Operations", src: bgi1 },
-            { id: 2, title: "Programming Bootcamp Recap", category: "Academic Node", src: bgi2 },
-            { id: 3, title: "Emergency Relief Campaign", category: "Social Service", src: bgi3 }
+            { id: 1, title: "Retro to Metro Carnival 2026", category: "Cultural Event", src: bgi1 },
+            { id: 2, title: "Retro To Metro Carnival 2026", category: "Cultural Event", src: bgi2 },
+            { id: 3, title: "Grand Together", category: "Social Event", src: bgi3 }
           ].map((video) => (
             <div 
               key={video.id}
