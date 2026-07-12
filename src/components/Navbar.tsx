@@ -78,11 +78,11 @@ export default function Navbar({
 
   const navItems = [
     { label: 'Home', view: 'home' },
-    { label: 'About', view: 'about-know', dropdown: true },
+    { label: 'About Us', view: 'about-know', dropdown: true },
     { label: 'Departments', view: 'departments', list: true },
     { label: 'Events', view: 'events' },
     { label: 'Gallery', view: 'gallery' },
-    { label: 'Team', view: 'leadership' },
+    { label: 'Our Squad', view: 'leadership' },
     { label: 'Contact', view: 'contact' }
   ];
 
@@ -469,7 +469,7 @@ export default function Navbar({
                     onClick={() => onNavigate('join')}
                     className="hidden md:block px-6 py-2.5 rounded-full text-xs font-extrabold text-white dark:text-black bg-gradient-to-r from-sky-600 via-sky-500 to-sky-700 dark:from-sky-400 dark:via-sky-300 dark:to-sky-500 shadow-[0_0_15px_rgba(56,189,248,0.3)] dark:shadow-[0_0_15px_rgba(56,189,248,0.5)] border border-sky-400/20 hover:scale-105 hover:shadow-[0_0_25px_rgba(56,189,248,0.5)] dark:hover:shadow-[0_0_25px_rgba(56,189,248,0.7)] transition-all duration-300"
                   >
-                    Join Us
+                    Join now
                   </button>
                 </div>
               )}
