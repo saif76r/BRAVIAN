@@ -5,12 +5,124 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Facebook, Linkedin, Mail, Users, Quote, ArrowUpRight } from 'lucide-react';
+import { Facebook, Linkedin, Mail, Users, Quote, ArrowUpRight, Loader2 } from 'lucide-react';
+
+// কোনো ইমেজ লোড হতে ব্যর্থ হলে এই ইউনিভার্সাল অ্যাভাটারটি শো করবে
+const DEFAULT_AVATAR = 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&auto=format&fit=crop&q=80&fm=webp';
+
+interface LeaderCardProps {
+  leader: any;
+  onViewProfile: (leader: any) => void;
+}
+
+// বড় লিডার কার্ডগুলোর জন্য অপ্টিমাইজড সাব-কম্পোনেন্ট
+function CoreLeaderCard({ leader, onViewProfile }: LeaderCardProps) {
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [imgSrc, setImgSrc] = useState(leader.image);
+
+  return (
+    <div className="group relative rounded-2xl border border-zinc-200/50 dark:border-zinc-800/80 bg-white dark:bg-zinc-950 overflow-hidden shadow-md hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 flex flex-col w-full max-w-sm mx-auto">
+      <div className="relative h-64 overflow-hidden bg-zinc-50 dark:bg-zinc-900 flex items-center justify-center">
+        
+        {!isLoaded && (
+          <div className="absolute inset-0 flex items-center justify-center bg-zinc-100 dark:bg-zinc-900 animate-pulse">
+            <Loader2 className="w-6 h-6 animate-spin text-emerald-500" />
+          </div>
+        )}
+
+        <img 
+          src={imgSrc} 
+          alt={leader.name} 
+          loading="lazy"
+          onLoad={() => setIsLoaded(true)}
+          onError={() => setImgSrc(DEFAULT_AVATAR)}
+          className={`w-full h-full object-cover group-hover:scale-105 transition-all duration-500 ${
+            isLoaded ? 'opacity-100 blur-0' : 'opacity-0 blur-md'
+          }`}
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4 z-10">
+          <p className="text-xs text-emerald-300 italic font-medium leading-relaxed">
+            "{leader.quote}"
+          </p>
+        </div>
+      </div>
+
+      <div className="p-6 text-left flex-1 flex flex-col justify-between space-y-4">
+        <div className="space-y-1.5">
+          <span className="text-[10px] text-emerald-500 font-mono font-bold tracking-widest uppercase block">{leader.designation}</span>
+          <h3 className="font-sans font-black text-base text-zinc-850 dark:text-white">{leader.name}</h3>
+          <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed line-clamp-3">{leader.bio}</p>
+        </div>
+
+        <div className="pt-4 border-t border-zinc-100 dark:border-zinc-900 flex items-center justify-between">
+          <div className="flex space-x-3">
+            <a href={leader.facebook} target="_blank" rel="noopener noreferrer" className="p-1.5 rounded bg-zinc-50 dark:bg-zinc-900 text-zinc-400 hover:text-emerald-500 transition-colors">
+              <Facebook className="w-4 h-4" />
+            </a>
+            <a href={leader.linkedin} target="_blank" rel="noopener noreferrer" className="p-1.5 rounded bg-zinc-50 dark:bg-zinc-900 text-zinc-400 hover:text-emerald-500 transition-colors">
+              <Linkedin className="w-4 h-4" />
+            </a>
+            <a href={`mailto:${leader.email}`} className="p-1.5 rounded bg-zinc-50 dark:bg-zinc-900 text-zinc-400 hover:text-emerald-500 transition-colors">
+              <Mail className="w-4 h-4" />
+            </a>
+          </div>
+
+          <button
+            onClick={() => onViewProfile(leader)}
+            className="px-3 py-1.5 rounded-lg text-[10px] font-bold text-emerald-500 hover:bg-emerald-50 dark:hover:bg-emerald-950/20 transition-all flex items-center space-x-1"
+          >
+            <span>View Profile</span>
+            <ArrowUpRight className="w-3.5 h-3.5" />
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// জেনারেল সেক্রেটারি ও ডিপার্টমেন্ট হেডদের গোল আকৃতির মিনি কার্ডের জন্য সাব-কম্পোনেন্ট
+function MiniTeamCard({ member, showEmail = false }: { member: any; showEmail?: boolean }) {
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [imgSrc, setImgSrc] = useState(member.image);
+
+  return (
+    <div className="group rounded-2xl border border-zinc-200/50 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4 text-center space-y-3 hover:shadow-xl hover:scale-[1.02] transition-all duration-350">
+      <div className="relative w-20 h-20 mx-auto rounded-full overflow-hidden bg-zinc-50 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-855 flex items-center justify-center">
+        {!isLoaded && (
+          <div className="absolute inset-0 bg-zinc-200 dark:bg-zinc-800 animate-pulse rounded-full" />
+        )}
+        <img 
+          src={imgSrc} 
+          alt={member.name} 
+          loading="lazy"
+          onLoad={() => setIsLoaded(true)}
+          onError={() => setImgSrc(DEFAULT_AVATAR)}
+          className={`w-full h-full object-cover group-hover:scale-110 transition-all duration-500 ${
+            isLoaded ? 'opacity-100' : 'opacity-0'
+          }`}
+        />
+      </div>
+      <div className="space-y-1">
+        <h4 className="text-xs font-bold text-zinc-800 dark:text-zinc-100 leading-tight truncate" title={member.name}>
+          {member.name}
+        </h4>
+        <p className="text-[9px] font-mono font-bold text-emerald-500 uppercase tracking-wide">
+          {member.role}
+        </p>
+        {showEmail && member.email && (
+          <a href={`mailto:${member.email}`} className="text-[8px] text-zinc-400 hover:text-emerald-500 hover:underline block truncate mt-1">
+            {member.email}
+          </a>
+        )}
+      </div>
+    </div>
+  );
+}
 
 export default function LeadershipView() {
   const [selectedLeader, setSelectedLeader] = useState<any | null>(null);
 
-  // Core Executive Data - Simple File Names (ফিক্সড: public/ বাদ দিয়ে /team/... করা হয়েছে)
+  // Data Objects
   const founder = {
     id: 'founder',
     name: 'SAT  Sanjid',
@@ -50,7 +162,6 @@ export default function LeadershipView() {
     signature: 'S. Onima'
   };
 
-  // New Advisors Data (ফিক্সড: public/ বাদ দেওয়া হয়েছে)
   const advisors = [
     {
       id: 'advisor-1',
@@ -78,47 +189,15 @@ export default function LeadershipView() {
     }
   ];
 
-  // 4 General Secretaries / Executive Members (ফিক্সড: public/ বাদ দেওয়া হয়েছে)
   const generalSecretaries = [
-    {
-      name: 'Afrina Haque',
-      role: 'General Secretary',
-      email: 'afrinahaqueofficial@gmail.com',
-      image: '/team/afrina.jpg'
-    },
-    {
-      name: 'Aannafi Hossain',
-      role: 'Additional General Secretary',
-      email: 'hossainaannafi2004@gmail.com',
-      image: '/team/annafi.jpg'
-    },
-    {
-      name: 'Sunerah Jahan',
-      role: 'Assistant General Secretary',
-      email: 'vp@bgi-community.org',
-      image: '/team/sunerah.jpg'
-    },
-    {
-      name: 'Waheda Rahman',
-      role: 'AssistantJoint Secretary',
-      email: 'angelwahedarahman89@gmail.com',
-      image: '/team/waheda.jpg'
-    },
-    {
-      name: 'Asma Sultana Minan ',
-      role: 'Internal Joint Secretary',
-      email: 'asma.globalunityfoundation@gmail.com',
-      image: '/team/minan.jpg'
-    },
-    {
-      name: 'Abdullah Al Hasib ',
-      role: 'Executive Secretary',
-      email: 'treasurer@bgi-community.org',
-      image: '/team/hasib.jpg'
-    }
+    { name: 'Afrina Haque', role: 'General Secretary', email: 'afrinahaqueofficial@gmail.com', image: '/team/afrina.jpg' },
+    { name: 'Aannafi Hossain', role: 'Additional General Secretary', email: 'hossainaannafi2004@gmail.com', image: '/team/annafi.jpg' },
+    { name: 'Sunerah Jahan', role: 'Assistant General Secretary', email: 'vp@bgi-community.org', image: '/team/sunerah.jpg' },
+    { name: 'Waheda Rahman', role: 'AssistantJoint Secretary', email: 'angelwahedarahman89@gmail.com', image: '/team/waheda.jpg' },
+    { name: 'Asma Sultana Minan ', role: 'Internal Joint Secretary', email: 'asma.globalunityfoundation@gmail.com', image: '/team/minan.jpg' },
+    { name: 'Abdullah Al Hasib ', role: 'Executive Secretary', email: 'treasurer@bgi-community.org', image: '/team/hasib.jpg' }
   ];
 
-  // Department Heads 
   const departmentHeads = [
     { name: 'Aiman Akil', role: 'Department Head PR, Marketing & collabration', image: '/team/aiman.jpg' },
     { name: 'Asma Sultana Minan', role: 'HR Department Head', image: '/team/minan.jpg' },
@@ -132,8 +211,7 @@ export default function LeadershipView() {
     { name: 'Jinia Akter', role: 'Department Head Creative & Design', image: '/team/jinia.jpg' },
   ];
 
-
-   const assistantDepartmentHeads = [
+  const assistantDepartmentHeads = [
     { name: 'Tahsen Tabassum Sthirota', role: 'Assistant Department Head PR, Marketing & collabration', image: '/team/tabassum.jpg' },
     { name: 'Ayshe Nath', role: 'Assistant Department Head HR', image: '/team/ayshe.jpg' },
     { name: 'Meer Md. Saif', role: 'Assistant Department Head IT', image: '/team/saif.jpg' },
@@ -143,53 +221,6 @@ export default function LeadershipView() {
     { name: 'Fariya Abedin', role: 'Assistant Department Head Creative & Design', image: '/team/fariya.jpg' },
     { name: 'Mahbuba Akter Alpha', role: 'Assistant Department Head Creative & Design', image: '/team/mahbuba.jpg' },
   ];
-
-  const LeaderCard = ({ leader }: { leader: any }) => (
-    <div className="group relative rounded-2xl border border-zinc-200/50 dark:border-zinc-800/80 bg-white dark:bg-zinc-950 overflow-hidden shadow-md hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 flex flex-col w-full max-w-sm mx-auto">
-      <div className="relative h-64 overflow-hidden bg-zinc-50 dark:bg-zinc-900">
-        <img 
-          src={leader.image} 
-          alt={leader.name} 
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-          <p className="text-xs text-emerald-300 italic font-medium leading-relaxed">
-            "{leader.quote}"
-          </p>
-        </div>
-      </div>
-
-      <div className="p-6 text-left flex-1 flex flex-col justify-between space-y-4">
-        <div className="space-y-1.5">
-          <span className="text-[10px] text-emerald-500 font-mono font-bold tracking-widest uppercase block">{leader.designation}</span>
-          <h3 className="font-sans font-black text-base text-zinc-850 dark:text-white">{leader.name}</h3>
-          <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed line-clamp-3">{leader.bio}</p>
-        </div>
-
-        <div className="pt-4 border-t border-zinc-100 dark:border-zinc-900 flex items-center justify-between">
-          <div className="flex space-x-3">
-            <a href={leader.facebook} target="_blank" rel="noopener noreferrer" className="p-1.5 rounded bg-zinc-50 dark:bg-zinc-900 text-zinc-400 hover:text-emerald-500 transition-colors">
-              <Facebook className="w-4 h-4" />
-            </a>
-            <a href={leader.linkedin} target="_blank" rel="noopener noreferrer" className="p-1.5 rounded bg-zinc-50 dark:bg-zinc-900 text-zinc-400 hover:text-emerald-500 transition-colors">
-              <Linkedin className="w-4 h-4" />
-            </a>
-            <a href={`mailto:${leader.email}`} className="p-1.5 rounded bg-zinc-50 dark:bg-zinc-900 text-zinc-400 hover:text-emerald-500 transition-colors">
-              <Mail className="w-4 h-4" />
-            </a>
-          </div>
-
-          <button
-            onClick={() => setSelectedLeader(leader)}
-            className="px-3 py-1.5 rounded-lg text-[10px] font-bold text-emerald-500 hover:bg-emerald-50 dark:hover:bg-emerald-950/20 transition-all flex items-center space-x-1"
-          >
-            <span>View Profile</span>
-            <ArrowUpRight className="w-3.5 h-3.5" />
-          </button>
-        </div>
-      </div>
-    </div>
-  );
 
   return (
     <div id="leadership-view-container" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-left">
@@ -203,18 +234,15 @@ export default function LeadershipView() {
 
       {/* Hierarchical Core Leadership Layout */}
       <div className="space-y-12 mb-20">
-        {/* Row 1: Founder Centered */}
         <div className="flex justify-center">
-          <LeaderCard leader={founder} />
+          <CoreLeaderCard leader={founder} onViewProfile={setSelectedLeader} />
         </div>
 
-        {/* Row 2: Co-Founder (Left) & CEO (Right) */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-          <LeaderCard leader={coFounder} />
-          <LeaderCard leader={ceo} />
+          <CoreLeaderCard leader={coFounder} onViewProfile={setSelectedLeader} />
+          <CoreLeaderCard leader={ceo} onViewProfile={setSelectedLeader} />
         </div>
 
-        {/* Row 3: Advisor Team Section (Just Below Co-Founder & CEO) */}
         <div className="space-y-6 max-w-4xl mx-auto pt-6 border-t border-zinc-100/30 dark:border-zinc-900/50">
           <div className="text-center">
             <span className="text-[10px] text-emerald-500 font-mono font-bold tracking-widest uppercase block mb-1">Advisory Panel</span>
@@ -222,7 +250,7 @@ export default function LeadershipView() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {advisors.map((advisor) => (
-              <LeaderCard key={advisor.id} leader={advisor} />
+              <CoreLeaderCard key={advisor.id} leader={advisor} onViewProfile={setSelectedLeader} />
             ))}
           </div>
         </div>
@@ -230,113 +258,50 @@ export default function LeadershipView() {
 
       {/* Our Team Master Section */}
       <section className="space-y-12 pt-12 border-t border-zinc-100 dark:border-zinc-900">
-
-        {/* Subsection 1: 4 General Secretaries Grid */}
+        
+        {/* General Secretaries */}
         <div className="space-y-6">
           <div className="flex items-center space-x-2 border-b border-zinc-100 dark:border-zinc-900 pb-2">
             <Users className="w-4 h-4 text-emerald-500" />
             <h3 className="font-sans font-bold text-sm text-zinc-700 dark:text-zinc-300 uppercase tracking-wider">General Secretaries</h3>
           </div>
-          
           <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
             {generalSecretaries.map((member, idx) => (
-              <div 
-                key={idx}
-                className="group rounded-2xl border border-zinc-200/50 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4 text-center space-y-3 hover:shadow-xl hover:scale-[1.02] transition-all duration-350"
-              >
-                <div className="relative w-20 h-20 mx-auto rounded-full overflow-hidden bg-zinc-50 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-850">
-                  <img 
-                    src={member.image} 
-                    alt={member.name} 
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                </div>
-                <div className="space-y-1">
-                  <h4 className="text-xs font-bold text-zinc-800 dark:text-zinc-100 leading-tight truncate" title={member.name}>
-                    {member.name}
-                  </h4>
-                  <p className="text-[9px] font-mono font-medium text-emerald-500">
-                    {member.role}
-                  </p>
-                  <a href={`mailto:${member.email}`} className="text-[8px] text-zinc-400 hover:text-emerald-500 hover:underline block truncate mt-1">{member.email}</a>
-                </div>
-              </div>
+              <MiniTeamCard key={idx} member={member} showEmail={true} />
             ))}
           </div>
         </div>
 
-        {/* Subsection 2: Department Heads Grid */}
+        {/* Department Heads */}
         <div className="space-y-6 pt-6">
           <div className="flex items-center space-x-2 border-b border-zinc-100 dark:border-zinc-900 pb-2">
             <Users className="w-4 h-4 text-emerald-500" />
             <h3 className="font-sans font-bold text-sm text-zinc-700 dark:text-zinc-300 uppercase tracking-wider">Department Heads</h3>
           </div>
-
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-6">
             {departmentHeads.map((member, idx) => (
-              <div 
-                key={idx}
-                className="group rounded-2xl border border-zinc-200/50 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-3 sm:p-4 text-center space-y-3 hover:shadow-xl hover:scale-[1.02] transition-all duration-350"
-              >
-                <div className="relative w-20 h-20 mx-auto rounded-full overflow-hidden bg-zinc-50 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-850">
-                  <img 
-                    src={member.image} 
-                    alt={member.name} 
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                </div>
-                <div className="space-y-1">
-                  <h4 className="text-xs font-bold text-zinc-800 dark:text-zinc-100 leading-tight truncate" title={member.name}>
-                    {member.name}
-                  </h4>
-                  <p className="text-[9px] font-mono font-bold text-emerald-500 uppercase tracking-wide">
-                    {member.role}
-                  </p>
-                </div>
-              </div>
+              <MiniTeamCard key={idx} member={member} />
             ))}
           </div>
         </div>
       </section>
 
-
+      {/* Assistant Department Heads */}
       <section className="space-y-12 pt-12 border-t border-zinc-100 dark:border-zinc-900">
-
-              {/* Subsection 3: Assistent Department Heads Grid */}
         <div className="space-y-6 pt-6">
           <div className="flex items-center space-x-2 border-b border-zinc-100 dark:border-zinc-900 pb-2">
             <Users className="w-4 h-4 text-emerald-500" />
             <h3 className="font-sans font-bold text-sm text-zinc-700 dark:text-zinc-300 uppercase tracking-wider">Assistant Department Heads</h3>
           </div>
-
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-6">
             {assistantDepartmentHeads.map((member, idx) => (
-              <div 
-                key={idx}
-                className="group rounded-2xl border border-zinc-200/50 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-3 sm:p-4 text-center space-y-3 hover:shadow-xl hover:scale-[1.02] transition-all duration-350"
-              >
-                <div className="relative w-20 h-20 mx-auto rounded-full overflow-hidden bg-zinc-50 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-850">
-                  <img 
-                    src={member.image} 
-                    alt={member.name} 
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                </div>
-                <div className="space-y-1">
-                  <h4 className="text-xs font-bold text-zinc-800 dark:text-zinc-100 leading-tight truncate" title={member.name}>
-                    {member.name}
-                  </h4>
-                  <p className="text-[9px] font-mono font-bold text-emerald-500 uppercase tracking-wide">
-                    {member.role}
-                  </p>
-                </div>
-              </div>
+              <MiniTeamCard key={idx} member={member} />
             ))}
           </div>
         </div>
       </section>
 
-      {/* Detailed Leader Modal Drawer */}
+      {/* Profile Modal */}
       <AnimatePresence>
         {selectedLeader && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-zinc-950/70 backdrop-blur-md">
@@ -357,8 +322,8 @@ export default function LeadershipView() {
               </div>
 
               <div className="p-6 grid grid-cols-1 sm:grid-cols-3 gap-6">
-                <div className="sm:col-span-1 rounded-xl overflow-hidden h-48 bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-800">
-                  <img src={selectedLeader.image} alt={selectedLeader.name} className="w-full h-full object-cover" />
+                <div className="sm:col-span-1 rounded-xl overflow-hidden h-48 bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center">
+                  <img src={selectedLeader.image} alt={selectedLeader.name} className="w-full h-full object-cover" onError={(e) => {(e.target as HTMLImageElement).src = DEFAULT_AVATAR}} />
                 </div>
 
                 <div className="sm:col-span-2 text-left space-y-4">
@@ -366,9 +331,7 @@ export default function LeadershipView() {
                     <span className="text-[10px] text-emerald-500 font-bold tracking-widest uppercase">{selectedLeader.designation}</span>
                     <h3 className="font-sans font-black text-xl text-zinc-900 dark:text-white">{selectedLeader.name}</h3>
                   </div>
-
                   <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed">{selectedLeader.bio}</p>
-
                   <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-900 relative space-y-2">
                     <Quote className="w-5 h-5 text-emerald-500/20 absolute top-2 right-4" />
                     <p className="text-xs text-zinc-600 dark:text-zinc-300 italic leading-relaxed">
