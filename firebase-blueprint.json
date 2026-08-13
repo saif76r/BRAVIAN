@@ -1,0 +1,100 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "BGI Community registered member profile.",
+      "type": "object",
+      "properties": {
+        "memberId": { "type": "string", "description": "Unique generated membership ID" },
+        "fullName": { "type": "string", "description": "User's full name" },
+        "email": { "type": "string", "description": "User's primary email address" },
+        "phone": { "type": "string", "description": "Phone number" },
+        "studentId": { "type": "string", "description": "Academic Student ID" },
+        "batch": { "type": "string", "description": "Academic Batch" },
+        "department": { "type": "string", "description": "Academic Department" },
+        "bloodGroup": { "type": "string", "description": "Blood Group" },
+        "address": { "type": "string", "description": "Home address" },
+        "emergencyContact": { "type": "string", "description": "Emergency contact number" },
+        "photoUrl": { "type": "string", "description": "URL or Base64 of the profile picture" },
+        "role": { "type": "string", "description": "Role in community (Member, Admin, etc.)", "enum": ["Super Admin", "Admin", "Department Head", "Moderator", "Member"] },
+        "membershipStatus": { "type": "string", "description": "Status of the membership", "enum": ["Active", "Pending", "Expired"] },
+        "joinDate": { "type": "string", "format": "date-time", "description": "Date of joining BGI Community" },
+        "membershipExpiry": { "type": "string", "format": "date-time", "description": "Date when membership expires" }
+      },
+      "required": ["fullName", "email", "phone", "studentId", "batch", "department", "bloodGroup", "address", "emergencyContact"]
+    },
+    "Complaint": {
+      "title": "Complaint / Inquiry",
+      "description": "Complaint or inquiry filed by a BGI community member.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "name": { "type": "string" },
+        "memberId": { "type": "string" },
+        "email": { "type": "string" },
+        "phone": { "type": "string" },
+        "subject": { "type": "string" },
+        "category": { "type": "string" },
+        "priority": { "type": "string", "enum": ["Low", "Medium", "High"] },
+        "description": { "type": "string" },
+        "attachmentUrl": { "type": "string" },
+        "status": { "type": "string", "enum": ["Pending", "In Progress", "Resolved"] },
+        "timestamp": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "name", "email", "subject", "category", "priority", "description"]
+    },
+    "Registration": {
+      "title": "Event Ticket Registration",
+      "description": "An event registration and ticket record.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "eventId": { "type": "string" },
+        "eventTitle": { "type": "string" },
+        "eventDate": { "type": "string" },
+        "eventVenue": { "type": "string" },
+        "ticketId": { "type": "string" },
+        "qrCode": { "type": "string" },
+        "status": { "type": "string", "enum": ["Active", "Cancelled"] },
+        "paymentStatus": { "type": "string", "enum": ["Paid", "Free"] },
+        "seatNumber": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "eventId", "eventTitle", "ticketId"]
+    },
+    "Notification": {
+      "title": "Notification",
+      "description": "A notification message for a user.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "title": { "type": "string" },
+        "message": { "type": "string" },
+        "read": { "type": "boolean" },
+        "timestamp": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "title", "message", "read", "timestamp"]
+    }
+  },
+  "firestore": {
+    "users/{userId}": {
+      "schema": "User",
+      "description": "User profile collection indexed by Firebase Authentication UID."
+    },
+    "complaints/{complaintId}": {
+      "schema": "Complaint",
+      "description": "Complaints collection filed by members."
+    },
+    "registrations/{registrationId}": {
+      "schema": "Registration",
+      "description": "Tickets and event registrations."
+    },
+    "notifications/{notificationId}": {
+      "schema": "Notification",
+      "description": "Notification center items."
+    }
+  }
+}

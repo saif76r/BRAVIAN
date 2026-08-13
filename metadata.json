@@ -1,0 +1,6 @@
+{
+  "name": "BGI Community",
+  "description": "A premium enterprise-grade community platform for BGI Community members, featuring event portals, activities, department details, and an interactive member dashboard.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
