@@ -16,7 +16,7 @@ const DEPARTMENTS_DATA = [
     responsibilities: ['Managing external communications and press releases', 'Maintaining relationships with university authorities', 'Drafting official community invitation letters'],
     projects: [{ name: 'Global Outreach 2026', desc: 'Expanding BGI presence in new international institutions.', status: 'Ongoing' }],
     achievements: ['Successfully completed 50+ institutional collaborations.'],
-    head: { name: 'Aiman Akil', role: 'PR Director', email: 'aimanakil08@gmail.com', quote: 'Building relationships is not just about communication; it is about creating trust.', imageKey: 'aiman.jpg' }
+    head: { name: 'Tasnim Ahmed', role: 'PR Director', email: 'aimanakil08@gmail.com', quote: 'Building relationships is not just about communication; it is about creating trust.', imageKey: 'aiman.jpg' }
   },
   {
     id: 'hr',

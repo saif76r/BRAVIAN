@@ -7,7 +7,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, ChevronLeft, ChevronRight, Calendar, Tag, ArrowUpRight, Loader2, Plus } from 'lucide-react';
 
-
+// ইমেজ সাইজ কমিয়ে এবং WebP ফরম্যাট ব্যবহার করে অপ্টিমাইজ করা হয়েছে (&fm=webp)
 const fallbackImages = [
   'https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=400&auto=format&fit=crop&q=80&fm=webp',
   'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=400&auto=format&fit=crop&q=80&fm=webp',
@@ -92,27 +92,6 @@ const rawImages = [
   'Cultural Programs_BGI Cultural Fest 2026_2026-02-20_33.jpg',
   'Cultural Programs_BGI Cultural Fest 2026_2026-02-20_34.jpg',
   'Cultural Programs_BGI Cultural Fest 2026_2026-02-20_35.jpg',
-  'Cultural Programs_BGI Retro to Metro Carnival 2026_2026-02-20_36.jpg',
-  'Cultural Programs_BGI Retro to Metro Carnival 2026_2026-02-20_37.jpg',
-  'Cultural Programs_BGI Retro to Metro Carnival 2026_2026-02-20_38.jpg',
-  'Cultural Programs_BGI Retro to Metro Carnival 2026_2026-02-20_39.jpg',
-  'Cultural Programs_BGI Retro to Metro Carnival 2026_2026-02-20_40.jpg',
-  'Cultural Programs_BGI Retro to Metro Carnival 2026_2026-02-20_41.jpg',
-  'Cultural Programs_BGI Retro to Metro Carnival 2026_2026-02-20_42.jpg',
-  'Cultural Programs_BGI Retro to Metro Carnival 2026_2026-02-20_43.jpg',
-  'Cultural Programs_BGI Retro to Metro Carnival 2026_2026-02-20_44.jpg',
-  'Cultural Programs_BGI Retro to Metro Carnival 2026_2026-02-20_45.jpg',
-  'Cultural Programs_BGI Retro to Metro Carnival 2026_2026-02-20_46.jpg',
-  'Cultural Programs_BGI Retro to Metro Carnival 2026_2026-02-20_47.jpg',
-  'Cultural Programs_BGI Retro to Metro Carnival 2026_2026-02-20_48.jpg',
-  'Cultural Programs_BGI Retro to Metro Carnival 2026_2026-02-20_49.jpg',
-  'Cultural Programs_BGI Retro to Metro Carnival 2026_2026-02-20_50.jpg',
-  'Cultural Programs_BGI Retro to Metro Carnival 2026_2026-02-20_51.jpg',
-  'Cultural Programs_BGI Retro to Metro Carnival 2026_2026-02-20_52.jpg',
-  'Cultural Programs_BGI Retro to Metro Carnival 2026_2026-02-20_53.jpg',
-  'Cultural Programs_BGI Retro to Metro Carnival 2026_2026-02-20_54.jpg',
-  'Cultural Programs_BGI Retro to Metro Carnival 2026_2026-02-20_55.jpg',
-
 ];
 
 interface GalleryItem {

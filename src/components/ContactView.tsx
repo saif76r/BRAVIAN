@@ -19,7 +19,7 @@ export default function ContactView() {
     // Web3Forms API এর মাধ্যমে ইমেইল পাঠানোর অবজেক্ট তৈরি
     const submissionData = {
       ...formData,
-      // web3form api key
+      // আপনার ইমেইলে সরাসরি মেসেজ পাঠানোর জন্য Web3Forms এর public access key
       access_key: "de5b1775-6b14-4055-9845-be68089a583a" 
     };
 

@@ -23,24 +23,13 @@ const EVENTS = [
     status: 'Upcoming'
   },
   {
-    id: 'retro-to-metro-carnival',
-    title: 'Retro to Metro Carnival',
-    description: 'A grand carnival celebrating vintage aesthetics and modern metropolitan culture, featuring live music performances, interactive stalls, and creative showcases.',
-    category: 'CULTURAL',
-    date: '2026-01-07',
-    venue: 'BGI Grand Convention Hall, Dhaka',
-    image: 'https://scontent.fdac184-1.fna.fbcdn.net/v/t39.30808-6/573392086_733112079802977_1162287360479851580_n.jpg?stp=dst-jpg_tt6&cstp=mx2048x1152&ctp=s960x960&_nc_cat=109&ccb=1-7&_nc_sid=75d36f&_nc_eui2=AeEvMIA3Y74m_4D86SaTr_19oZHDOrqVoyShkcM6upWjJGnU8W8YCl9VOPaMsXalJrUYog_yrvp3RaYydQjndmi9&_nc_ohc=p8bF9DTaQtgQ7kNvwHNAT12&_nc_oc=AdqGCEqDQIUN_fzNl8G5KglQfPe7qcT5MYkb028ruFQ3VJMwAhgoZwBtceylzLgPJ_Q&_nc_zt=23&_nc_ht=scontent.fdac184-1.fna&_nc_gid=PY4nObC2EbkdOOY9GBOTew&_nc_ss=7b2a8&oh=00_AQGYsjMguLVAXUoR-ltx4HHthXMMqThQrXifYs18gm3k4A&oe=6A83BE04',
-    seatsRemaining: 0,
-    status: 'Past'
-  },
-  {
     id: 'ifter-party-2026',
     title: 'BGI Community Ifter Party 2026',
     description: 'A holy gathering of BGI Community members sharing blessings, thoughts, and breaking the fast together in the month of Ramadan.',
     category: 'CULTURAL',
     date: '2026-03-20',
     venue: 'BGI Grand Convention Hall, Dhaka',
-    image: 'https://scontent.fdac184-1.fna.fbcdn.net/v/t39.30808-6/640196607_820509841063200_7482061265929267387_n.jpg?stp=dst-jpg_tt6&cstp=mx2048x1152&ctp=s960x960&_nc_cat=105&ccb=1-7&_nc_sid=75d36f&_nc_eui2=AeErwT6V3oj2Kk9yz20RTLO45DlCYiLkH9zkOUJiIuQf3KTPc3b-KQ4Ic8pMOLqDuunpZ3LC4Pn4SRJHY2lTdlKK&_nc_ohc=7jPURMgowe8Q7kNvwFENCT6&_nc_oc=AdrJZ7fsSfG8fdHD35JhffvHAuHQLNv2_an6j4Z_uy-RUJabVUZFw49dcNho6u1lftc&_nc_zt=23&_nc_ht=scontent.fdac184-1.fna&_nc_gid=5WcgGczld5qJqamIk4POoQ&_nc_ss=7b2a8&oh=00_AQHkiZuA2c3JH4YGbUgfIKDWcDgB3wJZS4h34NMwX-Fh5w&oe=6A83946E', 
+    image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=500', 
     seatsRemaining: 0,
     status: 'Past'
   },
@@ -51,7 +40,7 @@ const EVENTS = [
     category: 'CULTURAL',
     date: '2026-02-15',
     venue: 'BGI Grand Convention Hall, Dhaka',
-    image: 'https://scontent.fdac165-1.fna.fbcdn.net/v/t39.30808-6/476672303_527183197062534_2417351736126845294_n.jpg?stp=dst-jpg_tt6&cstp=mx1640x924&ctp=s1640x924&_nc_cat=108&ccb=1-7&_nc_sid=75d36f&_nc_eui2=AeHt75zQVHnDw1VSAirton38nxZFM5D0iXmfFkUzkPSJeZixPC02D4YFXyslAA9Y-Ja2dG4LZnDtUH-nJlY141tH&_nc_ohc=7JPZNpSIDxwQ7kNvwG9Lw6C&_nc_oc=Ado9PtplCzkfkBcNpLtlRNuemxMBxAGA5ufH1uH-xf2mCrkFvD0IztKJW6dXCL5KE4k&_nc_zt=23&_nc_ht=scontent.fdac165-1.fna&_nc_gid=gqR_TONJfXosFNgxbp6q7A&_nc_ss=7b2a8&oh=00_AQGiETxijqJNXRBtwk1u14dAUoLEROA3PCgE9_zb4eXMfw&oe=6A83B4FD', 
+    image: 'https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?q=80&w=500', 
     seatsRemaining: 0,
     status: 'Past'
   },
@@ -62,7 +51,7 @@ const EVENTS = [
     category: 'EDUCATION',
     date: '2025-05-03',
     venue: 'BGI Seminar Hall, Dhaka',
-    image: 'https://scontent.fdac165-1.fna.fbcdn.net/v/t39.30808-6/482198028_547009485079905_1863729998851705353_n.jpg?stp=dst-jpg_tt6&cstp=mx2048x1152&ctp=s960x960&_nc_cat=108&ccb=1-7&_nc_sid=75d36f&_nc_eui2=AeGvZz9sYjPEji09p4N0AD4y_pP729Q1nLT-k_vb1DWctOZn0LW1ivaMPxSN92G9GwVEl42OQ9maPGeoTdKTaStP&_nc_ohc=ITtAzjpAhzIQ7kNvwEQbDEs&_nc_oc=Ado4yl-4KBihQxhgTxcviR3dKGxW0QeamLPe_Ne0qxf1qMy8L4MHMFSIUKAaIPUJ7aA&_nc_zt=23&_nc_ht=scontent.fdac165-1.fna&_nc_gid=AafOv3kvtml4yueIIlEA7Q&_nc_ss=7b2a8&oh=00_AQFpFDoIVUZBaFTA1z-8pYaR44TGzqVyoEJ9Aa29VgRlSw&oe=6A83AD11', 
+    image: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=500', 
     seatsRemaining: 0,
     status: 'Past'
   },
@@ -73,34 +62,10 @@ const EVENTS = [
     category: 'EDUCATION',
     date: '2026-01-17',
     venue: 'Ministry Auditorium, Dhaka',
-    image: 'https://m.media-amazon.com/images/I/71N6-ZDPOhL._AC_UF894,1000_QL80_.jpg', 
+    image: 'https://images.unsplash.com/photo-1431540015161-0bf868a2d407?q=80&w=500', 
     seatsRemaining: 0,
     status: 'Past'
   }
-];
-
-// Retro to Metro Carnival এর ইমেজ লিস্ট
-const CARNIVAL_GALLERY_IMAGES = [
-  '/gallery/Cultural Programs_BGI Retro to Metro Carnival 2026_2026-02-20_36.jpg',
-  '/gallery/Cultural Programs_BGI Retro to Metro Carnival 2026_2026-02-20_37.jpg',
-  '/gallery/Cultural Programs_BGI Retro to Metro Carnival 2026_2026-02-20_38.jpg',
-  '/gallery/Cultural Programs_BGI Retro to Metro Carnival 2026_2026-02-20_39.jpg',
-  '/gallery/Cultural Programs_BGI Retro to Metro Carnival 2026_2026-02-20_40.jpg',
-  '/gallery/Cultural Programs_BGI Retro to Metro Carnival 2026_2026-02-20_41.jpg',
-  '/gallery/Cultural Programs_BGI Retro to Metro Carnival 2026_2026-02-20_42.jpg',
-  '/gallery/Cultural Programs_BGI Retro to Metro Carnival 2026_2026-02-20_43.jpg',
-  '/gallery/Cultural Programs_BGI Retro to Metro Carnival 2026_2026-02-20_44.jpg',
-  '/gallery/Cultural Programs_BGI Retro to Metro Carnival 2026_2026-02-20_45.jpg',
-  '/gallery/Cultural Programs_BGI Retro to Metro Carnival 2026_2026-02-20_46.jpg',
-  '/gallery/Cultural Programs_BGI Retro to Metro Carnival 2026_2026-02-20_47.jpg',
-  '/gallery/Cultural Programs_BGI Retro to Metro Carnival 2026_2026-02-20_48.jpg',
-  '/gallery/Cultural Programs_BGI Retro to Metro Carnival 2026_2026-02-20_49.jpg',
-  '/gallery/Cultural Programs_BGI Retro to Metro Carnival 2026_2026-02-20_50.jpg',
-  '/gallery/Cultural Programs_BGI Retro to Metro Carnival 2026_2026-02-20_51.jpg',
-  '/gallery/Cultural Programs_BGI Retro to Metro Carnival 2026_2026-02-20_52.jpg',
-  '/gallery/Cultural Programs_BGI Retro to Metro Carnival 2026_2026-02-20_53.jpg',
-  '/gallery/Cultural Programs_BGI Retro to Metro Carnival 2026_2026-02-20_54.jpg',
-  '/gallery/Cultural Programs_BGI Retro to Metro Carnival 2026_2026-02-20_55.jpg',
 ];
 
 // ইফতার পার্টির ইমেজ লিস্ট
@@ -156,9 +121,10 @@ const CULTURAL_GALLERY_IMAGES = [
   '/gallery/Cultural Programs_BGI Cultural Fest 2026_2026-02-20_33.jpg',
   '/gallery/Cultural Programs_BGI Cultural Fest 2026_2026-02-20_34.jpg',
   '/gallery/Cultural Programs_BGI Cultural Fest 2026_2026-02-20_35.jpg',
+
 ];
 
-// ডিবেট কম্পিটিশন ওয়ার্কশপের ইমেজ লিস্ট
+// ডিবেট কম্পিটিশন ওয়ার্কশপের ইমেজ লিস্ট
 const DEBATE_GALLERY_IMAGES = [
   '/gallery/Workshop_Debate Competition_2025-05-03.jpg',
   '/gallery/Workshop_Debate Competition_2025-05-03_1.jpg',
@@ -294,7 +260,6 @@ export default function EventPortal({
 
   // Determine which images to show in the modal based on active event ID
   const getGalleryImages = () => {
-    if (activeEventId === 'retro-to-metro-carnival') return CARNIVAL_GALLERY_IMAGES;
     if (activeEventId === 'seminar-woman-child-2026') return SEMINAR_WOMAN_CHILD_IMAGES;
     if (activeEventId === 'debate-workshop-2025') return DEBATE_GALLERY_IMAGES;
     if (activeEventId === 'cultural-fest-2026') return CULTURAL_GALLERY_IMAGES;
@@ -548,7 +513,7 @@ export default function EventPortal({
                 </div>
                 <button 
                   onClick={() => setIsGalleryOpen(false)}
-                  className="p-2.5 text-zinc-400 hover:text-white bg-zinc-900/80 hover:bg-zinc-800 border border-zinc-850 rounded-xl transition-all cursor-pointer shadow-md"
+                  className="p-2.5 text-zinc-400 hover:text-white bg-zinc-900/80 hover:bg-zinc-800 border border-zinc-800 rounded-xl transition-all cursor-pointer shadow-md"
                 >
                   <X className="w-5 h-5" />
                 </button>
